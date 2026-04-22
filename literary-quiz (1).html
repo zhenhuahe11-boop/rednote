@@ -1,0 +1,2181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>你藏着哪位文学灵魂？</title>
+<meta property="og:title" content="你藏着哪位文学灵魂？">
+<meta property="og:description" content="10道题揭示你的文学灵魂底色——黛玉、哈姆雷特、简·爱？免费测试，付费解锁深度报告">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://via.placeholder.com/1200x630/0e0b06/b8933f?text=%E4%BD%A0%E8%97%8F%E7%9D%80%E5%93%AA%E4%BD%8D%E6%96%87%E5%AD%A6%E7%81%B5%E9%AD%82%EF%BC%9F">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --ink:#0e0b06;
+  --paper:#fdf9f3;
+  --gold:#b8933f;
+  --gold-light:#e8c97a;
+  --gold-pale:#faf3e0;
+  --red:#8b2020;
+  --muted:#6b5e4a;
+  --border:#ddd0b8;
+  --blur:#f5efe3;
+}
+html,body{height:100%;background:#0e0b06;font-family:'Noto Sans SC',sans-serif}
+
+/* ─── SCROLLABLE WRAPPER ─── */
+#app{
+  max-width:420px;
+  margin:0 auto;
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+}
+
+/* ─── SCREENS ─── */
+.screen{display:none;flex-direction:column;min-height:100vh}
+.screen.active{display:flex}
+
+/* ═══════════ COVER ═══════════ */
+#screen-cover{
+  background:#0e0b06;
+  position:relative;
+  justify-content:space-between;
+  align-items:center;
+  padding:0;
+}
+.cover-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 30%, rgba(184,147,63,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(139,32,32,0.12) 0%, transparent 50%);
+}
+.cover-lines{
+  position:absolute;inset:0;overflow:hidden;
+}
+.cover-lines::before{
+  content:'';position:absolute;
+  top:0;left:50%;transform:translateX(-50%);
+  width:1px;height:100%;
+  background:linear-gradient(180deg,transparent 0%,rgba(184,147,63,0.3) 20%,rgba(184,147,63,0.3) 80%,transparent 100%);
+}
+.cover-content{
+  position:relative;z-index:1;
+  width:100%;padding:60px 32px 40px;
+  flex:1;display:flex;flex-direction:column;justify-content:center;
+}
+.cover-eyebrow{
+  font-size:10px;letter-spacing:0.4em;color:rgba(184,147,63,0.7);
+  text-transform:uppercase;margin-bottom:24px;
+  display:flex;align-items:center;gap:10px;
+}
+.cover-eyebrow::before,.cover-eyebrow::after{
+  content:'';flex:1;height:0.5px;background:rgba(184,147,63,0.3);
+}
+.cover-title{
+  font-family:'Noto Serif SC',serif;
+  font-size:2.6rem;font-weight:900;
+  color:#f5ead0;line-height:1.25;
+  margin-bottom:8px;
+  text-shadow:0 2px 20px rgba(184,147,63,0.2);
+}
+.cover-title span{color:#b8933f}
+.cover-subtitle{
+  font-size:13px;color:rgba(245,234,208,0.5);
+  letter-spacing:0.12em;margin-bottom:36px;
+}
+.cover-divider{
+  display:flex;align-items:center;gap:10px;margin-bottom:28px;
+}
+.cover-divider span{width:20px;height:0.5px;background:rgba(184,147,63,0.4)}
+.cover-divider i{width:5px;height:5px;border-radius:50%;background:#b8933f;opacity:0.7}
+.cover-desc{
+  font-size:14px;color:rgba(245,234,208,0.6);
+  line-height:1.9;margin-bottom:48px;
+}
+.cover-meta{
+  display:flex;gap:20px;margin-bottom:40px;
+}
+.cover-meta-item{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;color:rgba(245,234,208,0.4);letter-spacing:0.05em;
+}
+.cover-meta-dot{width:3px;height:3px;border-radius:50%;background:#b8933f;opacity:0.6}
+.start-btn{
+  width:100%;padding:16px;
+  background:linear-gradient(135deg,#b8933f,#d4ad5a,#b8933f);
+  background-size:200% 100%;
+  color:#0e0b06;border:none;border-radius:4px;
+  font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;
+  letter-spacing:0.2em;cursor:pointer;
+  transition:background-position 0.4s,transform 0.15s;
+  animation:shimmer 3s ease infinite;
+}
+.start-btn:hover{background-position:100% 0;transform:translateY(-1px)}
+.start-btn:active{transform:translateY(0)}
+@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.cover-footer{
+  padding:20px 32px 36px;
+  font-size:11px;color:rgba(245,234,208,0.25);
+  text-align:center;letter-spacing:0.05em;
+  position:relative;z-index:1;
+}
+
+/* ═══════════ QUIZ ═══════════ */
+#screen-quiz{
+  background:var(--paper);
+  padding:0;
+}
+.quiz-header{
+  padding:20px 24px 16px;
+  background:var(--paper);
+  border-bottom:0.5px solid var(--border);
+  position:sticky;top:0;z-index:10;
+}
+.quiz-header-top{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:10px;
+}
+.q-counter{font-size:11px;color:var(--muted);letter-spacing:0.1em}
+.q-pct{font-size:12px;font-weight:500;color:var(--gold)}
+.prog-track{height:2px;background:var(--border);border-radius:1px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),#d4ad5a);border-radius:1px;transition:width 0.5s cubic-bezier(.4,0,.2,1)}
+
+.quiz-body{padding:32px 24px;flex:1}
+.q-num{
+  font-size:10px;letter-spacing:0.3em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:14px;font-weight:500;
+}
+.q-text{
+  font-family:'Noto Serif SC',serif;
+  font-size:19px;font-weight:600;
+  color:var(--ink);line-height:1.65;
+  margin-bottom:28px;
+}
+.options{display:flex;flex-direction:column;gap:10px}
+.opt{
+  border:0.5px solid var(--border);
+  border-radius:6px;padding:14px 16px;
+  background:#fff;cursor:pointer;
+  display:flex;align-items:flex-start;gap:12px;
+  transition:all 0.15s;
+  font-size:14px;color:#3a2f22;line-height:1.65;
+  text-align:left;width:100%;font-family:'Noto Sans SC',sans-serif;
+}
+.opt:hover{border-color:var(--gold);background:var(--gold-pale)}
+.opt.selected{border-color:var(--gold);background:var(--gold-pale)}
+.opt-badge{
+  min-width:22px;height:22px;border-radius:50%;
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:500;color:var(--muted);
+  flex-shrink:0;margin-top:1px;transition:all 0.15s;
+}
+.opt.selected .opt-badge{background:var(--gold);border-color:var(--gold);color:#fff}
+
+.quiz-footer{
+  padding:16px 24px 32px;
+  display:flex;justify-content:space-between;gap:12px;
+}
+.nav-btn{
+  flex:1;padding:13px;border-radius:4px;
+  font-family:'Noto Sans SC',sans-serif;font-size:13px;
+  cursor:pointer;transition:all 0.15s;letter-spacing:0.05em;
+}
+.btn-back{
+  background:transparent;border:0.5px solid var(--border);
+  color:var(--muted);
+}
+.btn-back:hover{background:var(--blur)}
+.btn-next{
+  background:var(--ink);border:none;color:#f5ead0;
+  font-weight:500;
+}
+.btn-next:hover{background:#2a1e0e}
+.btn-next:disabled{background:var(--border);color:#aaa;cursor:not-allowed}
+.btn-next.last{background:linear-gradient(135deg,#8b2020,#a33030)}
+
+/* ═══════════ LOADING ═══════════ */
+#screen-loading{
+  background:var(--paper);
+  justify-content:center;align-items:center;
+  flex-direction:column;gap:20px;
+}
+.loading-text{
+  font-family:'Noto Serif SC',serif;
+  font-size:16px;color:var(--muted);
+  letter-spacing:0.15em;animation:pulse 1.5s ease infinite;
+}
+@keyframes pulse{0%,100%{opacity:0.5}50%{opacity:1}}
+.loading-dots{display:flex;gap:8px}
+.dot{
+  width:6px;height:6px;border-radius:50%;background:var(--gold);
+  animation:bounce 1.2s ease infinite;
+}
+.dot:nth-child(2){animation-delay:0.2s}
+.dot:nth-child(3){animation-delay:0.4s}
+@keyframes bounce{0%,80%,100%{transform:scale(0.8);opacity:0.4}40%{transform:scale(1.2);opacity:1}}
+
+/* ═══════════ RESULT (FREE) ═══════════ */
+#screen-result{background:#0e0b06;padding-bottom:40px}
+.res-hero{
+  position:relative;padding:48px 28px 36px;
+  background:linear-gradient(160deg,#1a1208 0%,#2a1810 50%,#1a1208 100%);
+  overflow:hidden;
+  border-bottom:0.5px solid rgba(184,147,63,0.2);
+}
+.res-hero-glow{
+  position:absolute;top:-40px;left:50%;transform:translateX(-50%);
+  width:260px;height:260px;
+  background:radial-gradient(circle,rgba(184,147,63,0.15) 0%,transparent 70%);
+  pointer-events:none;
+}
+.res-badge{
+  display:inline-block;
+  padding:4px 14px;
+  border:0.5px solid rgba(184,147,63,0.5);
+  border-radius:20px;
+  font-size:10px;letter-spacing:0.25em;
+  color:rgba(184,147,63,0.8);
+  margin-bottom:16px;text-transform:uppercase;
+}
+.res-name{
+  font-family:'Noto Serif SC',serif;
+  font-size:3rem;font-weight:900;
+  color:#f5ead0;line-height:1.1;
+  margin-bottom:6px;
+}
+.res-origin{font-size:12px;color:rgba(245,234,208,0.45);letter-spacing:0.1em;margin-bottom:20px}
+.res-tagline{
+  font-family:'Noto Serif SC',serif;
+  font-size:14px;color:rgba(245,234,208,0.7);
+  line-height:1.85;font-style:italic;
+  padding-left:14px;
+  border-left:2px solid var(--gold);
+}
+
+.res-body{padding:24px 24px 0}
+.res-section{margin-bottom:28px}
+.res-section-title{
+  font-size:10px;letter-spacing:0.3em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:14px;font-weight:500;
+}
+.trait-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.trait-card{
+  background:rgba(255,255,255,0.04);
+  border:0.5px solid rgba(184,147,63,0.15);
+  border-radius:6px;padding:12px 14px;
+}
+.trait-lbl{font-size:10px;color:rgba(245,234,208,0.35);margin-bottom:4px;letter-spacing:0.05em}
+.trait-val{font-size:13px;font-weight:500;color:rgba(245,234,208,0.85)}
+
+.res-desc-preview{
+  font-size:14px;color:rgba(245,234,208,0.6);
+  line-height:1.9;position:relative;
+}
+.res-desc-preview p{margin-bottom:12px}
+.res-blur-overlay{
+  position:absolute;bottom:0;left:0;right:0;height:80px;
+  background:linear-gradient(transparent,#0e0b06);
+  display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:4px;
+}
+.res-blur-label{font-size:11px;color:rgba(184,147,63,0.6);letter-spacing:0.1em}
+
+/* ─── PAYWALL ─── */
+.paywall{
+  margin:0 24px 24px;
+  background:linear-gradient(135deg,#1a1208,#2a1a08);
+  border:0.5px solid rgba(184,147,63,0.3);
+  border-radius:10px;overflow:hidden;
+}
+.paywall-top{
+  padding:24px 20px 20px;text-align:center;
+  border-bottom:0.5px solid rgba(184,147,63,0.15);
+}
+.paywall-lock{
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(184,147,63,0.12);
+  border:0.5px solid rgba(184,147,63,0.3);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 14px;
+  font-size:16px;
+}
+.paywall-title{
+  font-family:'Noto Serif SC',serif;
+  font-size:17px;font-weight:700;color:#f5ead0;
+  margin-bottom:6px;
+}
+.paywall-sub{font-size:12px;color:rgba(245,234,208,0.45);line-height:1.7}
+.paywall-features{padding:16px 20px}
+.feature-item{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 0;border-bottom:0.5px solid rgba(255,255,255,0.05);
+  font-size:13px;color:rgba(245,234,208,0.7);
+}
+.feature-item:last-child{border:none}
+.feature-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.paywall-cta{
+  padding:16px 20px 20px;
+}
+.price-row{
+  display:flex;align-items:baseline;gap:6px;margin-bottom:12px;
+  justify-content:center;
+}
+.price-main{
+  font-family:'Noto Serif SC',serif;
+  font-size:2rem;font-weight:700;color:#f5ead0;
+}
+.price-unit{font-size:12px;color:rgba(245,234,208,0.4)}
+.price-original{
+  font-size:12px;color:rgba(245,234,208,0.3);
+  text-decoration:line-through;
+}
+.unlock-btn{
+  width:100%;padding:15px;
+  background:linear-gradient(135deg,#b8933f,#d4ad5a);
+  color:#0e0b06;border:none;border-radius:6px;
+  font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;
+  letter-spacing:0.15em;cursor:pointer;
+  transition:opacity 0.15s,transform 0.15s;
+  margin-bottom:10px;
+}
+.unlock-btn:hover{opacity:0.9;transform:translateY(-1px)}
+.unlock-hint{
+  text-align:center;font-size:11px;
+  color:rgba(245,234,208,0.25);letter-spacing:0.05em;
+}
+
+/* ─── FULL REPORT (after unlock) ─── */
+.full-report{display:none;padding:0 24px 32px}
+.report-section{margin-bottom:32px}
+.report-section-title{
+  font-size:10px;letter-spacing:0.3em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:14px;font-weight:500;
+}
+.dim-item{margin-bottom:14px}
+.dim-row{
+  display:flex;justify-content:space-between;
+  font-size:12px;color:rgba(245,234,208,0.45);
+  margin-bottom:6px;
+}
+.dim-track{height:3px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden}
+.dim-fill{height:100%;background:linear-gradient(90deg,var(--gold),#d4ad5a);border-radius:2px;transition:width 1s ease}
+.advice-card{
+  background:rgba(255,255,255,0.03);
+  border:0.5px solid rgba(184,147,63,0.12);
+  border-radius:8px;padding:16px;margin-bottom:10px;
+}
+.advice-head{
+  font-size:12px;font-weight:500;color:rgba(245,234,208,0.7);
+  margin-bottom:6px;display:flex;align-items:center;gap:8px;
+}
+.advice-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.advice-body{font-size:13px;color:rgba(245,234,208,0.45);line-height:1.85}
+.peer-row{display:flex;gap:8px;flex-wrap:wrap}
+.peer-tag{
+  padding:6px 14px;
+  border:0.5px solid rgba(184,147,63,0.25);
+  border-radius:20px;font-size:12px;
+  color:rgba(245,234,208,0.6);
+  font-family:'Noto Serif SC',serif;
+}
+.full-desc{
+  font-size:14px;color:rgba(245,234,208,0.6);
+  line-height:1.95;
+}
+.full-desc p{margin-bottom:14px}
+.share-strip{
+  background:rgba(184,147,63,0.08);
+  border:0.5px solid rgba(184,147,63,0.2);
+  border-radius:8px;padding:16px;
+  text-align:center;margin-top:8px;
+}
+.share-strip p{font-size:12px;color:rgba(245,234,208,0.5);line-height:1.7}
+.share-strip strong{color:rgba(245,234,208,0.8);font-weight:500}
+.retry-row{padding:0 24px;margin-top:8px}
+.retry-btn-full{
+  width:100%;padding:13px;
+  background:transparent;
+  border:0.5px solid rgba(184,147,63,0.3);
+  border-radius:4px;color:rgba(245,234,208,0.5);
+  font-size:13px;cursor:pointer;letter-spacing:0.1em;
+  font-family:'Noto Sans SC',sans-serif;
+  transition:all 0.15s;
+}
+.retry-btn-full:hover{background:rgba(184,147,63,0.08);color:rgba(245,234,208,0.8)}
+
+/* modal */
+.modal-bg{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,0.75);z-index:100;
+  align-items:center;justify-content:center;padding:24px;
+}
+.modal-bg.open{display:flex}
+.modal{
+  background:#1a1208;
+  border:0.5px solid rgba(184,147,63,0.3);
+  border-radius:12px;width:100%;max-width:360px;
+  padding:28px 24px;text-align:center;
+}
+.modal h3{
+  font-family:'Noto Serif SC',serif;
+  font-size:18px;color:#f5ead0;margin-bottom:10px;font-weight:700;
+}
+.modal p{font-size:13px;color:rgba(245,234,208,0.55);line-height:1.75;margin-bottom:20px}
+.modal-input{
+  width:100%;padding:12px 14px;
+  background:rgba(255,255,255,0.05);
+  border:0.5px solid rgba(184,147,63,0.3);
+  border-radius:6px;color:#f5ead0;font-size:14px;
+  font-family:'Noto Sans SC',sans-serif;
+  outline:none;margin-bottom:12px;text-align:center;
+  letter-spacing:0.2em;
+}
+.modal-input::placeholder{color:rgba(245,234,208,0.2)}
+.modal-confirm{
+  width:100%;padding:13px;
+  background:linear-gradient(135deg,#b8933f,#d4ad5a);
+  color:#0e0b06;border:none;border-radius:6px;
+  font-family:'Noto Serif SC',serif;font-size:14px;font-weight:700;
+  cursor:pointer;letter-spacing:0.1em;margin-bottom:8px;
+}
+.modal-cancel{
+  width:100%;padding:10px;background:transparent;
+  border:none;color:rgba(245,234,208,0.3);font-size:12px;cursor:pointer;
+  font-family:'Noto Sans SC',sans-serif;letter-spacing:0.05em;
+}
+.modal-err{font-size:12px;color:#e06060;margin-bottom:8px;min-height:18px}
+
+/* countdown */
+.countdown-bar{
+  background:rgba(139,32,32,0.15);
+  border:0.5px solid rgba(139,32,32,0.3);
+  border-radius:6px;padding:10px 14px;
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:12px;
+}
+.cd-icon{font-size:13px}
+.cd-text{font-size:12px;color:rgba(245,234,208,0.7);flex:1}
+.cd-time{font-size:14px;font-weight:700;color:#e07070;font-family:'Noto Serif SC',serif;min-width:50px;text-align:right}
+
+/* share-unlock */
+.share-unlock{
+  background:rgba(184,147,63,0.08);
+  border:0.5px solid rgba(184,147,63,0.25);
+  border-radius:6px;padding:14px 16px;
+  margin-bottom:12px;
+}
+.share-unlock-title{
+  font-size:13px;font-weight:500;
+  color:rgba(245,234,208,0.8);margin-bottom:4px;
+  display:flex;align-items:center;gap:6px;
+}
+.share-unlock-sub{font-size:12px;color:rgba(245,234,208,0.45);margin-bottom:12px;line-height:1.6}
+.share-steps{display:flex;gap:6px;margin-bottom:12px}
+.share-step{
+  flex:1;text-align:center;
+  background:rgba(255,255,255,0.04);
+  border-radius:4px;padding:8px 4px;
+  font-size:11px;color:rgba(245,234,208,0.5);line-height:1.5;
+}
+.share-step strong{display:block;font-size:16px;color:#b8933f;font-weight:700;margin-bottom:2px}
+.share-progress-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.share-prog-label{font-size:11px;color:rgba(245,234,208,0.4)}
+.share-prog-count{font-size:12px;color:#b8933f;font-weight:500}
+.share-prog-track{height:3px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;margin-bottom:10px}
+.share-prog-fill{height:100%;background:linear-gradient(90deg,#b8933f,#d4ad5a);border-radius:2px;transition:width 0.5s}
+.share-btn{
+  width:100%;padding:11px;
+  background:transparent;
+  border:0.5px solid rgba(184,147,63,0.4);
+  border-radius:4px;color:rgba(245,234,208,0.7);
+  font-size:13px;cursor:pointer;
+  font-family:'Noto Sans SC',sans-serif;
+  letter-spacing:0.05em;transition:all 0.15s;
+}
+.share-btn:hover{background:rgba(184,147,63,0.1);color:rgba(245,234,208,0.9)}
+
+/* quiz slide animation */
+.quiz-body{transition:opacity 0.2s,transform 0.2s}
+.quiz-body.slide-out{opacity:0;transform:translateX(-20px)}
+.quiz-body.slide-in{opacity:0;transform:translateX(20px)}
+
+/* new chars compat */
+.res-hero{position:relative}
+
+
+/* ── Share card (截图卡片) ── */
+.card-screen{
+  position:fixed;inset:0;background:rgba(0,0,0,0.85);
+  z-index:200;display:none;align-items:center;justify-content:center;
+  padding:16px;
+}
+.card-screen.open{display:flex;}
+.share-card{
+  width:300px;
+  background:linear-gradient(160deg,#1a1208 0%,#2d1a0a 55%,#1a1208 100%);
+  border:1px solid rgba(184,147,63,0.4);
+  border-radius:12px;overflow:hidden;
+  position:relative;
+}
+.card-glow{
+  position:absolute;top:-30px;left:50%;transform:translateX(-50%);
+  width:200px;height:160px;
+  background:radial-gradient(circle,rgba(184,147,63,0.18) 0%,transparent 70%);
+  pointer-events:none;
+}
+.card-top{padding:28px 22px 18px;text-align:center;position:relative}
+.card-eyebrow{font-size:9px;letter-spacing:0.35em;color:rgba(184,147,63,0.6);text-transform:uppercase;margin-bottom:10px}
+.card-char-name{font-family:'Noto Serif SC',serif;font-size:2rem;font-weight:900;color:#f5ead0;line-height:1.1;margin-bottom:4px}
+.card-char-type{font-size:11px;color:rgba(184,147,63,0.7);margin-bottom:12px;letter-spacing:0.1em}
+.card-divider{width:40px;height:0.5px;background:linear-gradient(90deg,transparent,#b8933f,transparent);margin:0 auto 12px}
+.card-quote{font-family:'Noto Serif SC',serif;font-size:11px;color:rgba(245,234,208,0.55);line-height:1.75;font-style:italic;padding:0 8px}
+.card-traits-row{
+  display:flex;border-top:0.5px solid rgba(184,147,63,0.12);
+  padding:12px 16px;gap:6px;
+}
+.card-trait{
+  flex:1;background:rgba(255,255,255,0.04);
+  border-radius:4px;padding:7px 4px;text-align:center;
+}
+.card-trait-l{font-size:9px;color:rgba(245,234,208,0.3);margin-bottom:3px}
+.card-trait-v{font-size:10px;color:rgba(245,234,208,0.75);font-weight:500}
+.card-footer{
+  border-top:0.5px solid rgba(184,147,63,0.12);
+  padding:10px 16px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.card-footer-brand{font-size:9px;color:rgba(245,234,208,0.25);letter-spacing:0.1em}
+.card-footer-tag{font-size:9px;color:rgba(184,147,63,0.5);letter-spacing:0.05em}
+.card-actions{display:flex;flex-direction:column;gap:8px;padding:0 16px 16px}
+.card-act-btn{
+  width:100%;padding:11px;border-radius:4px;
+  font-size:13px;cursor:pointer;
+  font-family:'Noto Sans SC',sans-serif;letter-spacing:0.05em;
+  transition:all 0.15s;
+}
+.card-act-primary{background:linear-gradient(135deg,#b8933f,#d4ad5a);color:#0e0b06;border:none;font-weight:500}
+.card-act-secondary{background:transparent;border:0.5px solid rgba(184,147,63,0.3);color:rgba(245,234,208,0.6)}
+.card-act-secondary:hover{background:rgba(184,147,63,0.08)}
+.card-close{position:absolute;top:10px;right:12px;background:none;border:none;color:rgba(245,234,208,0.3);font-size:18px;cursor:pointer;line-height:1}
+
+/* ── Compatibility chart ── */
+.compat-section{margin-bottom:28px}
+.compat-item{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:8px;
+}
+.compat-name{font-size:12px;color:rgba(245,234,208,0.6);width:80px;flex-shrink:0;font-family:'Noto Serif SC',serif}
+.compat-track{flex:1;height:4px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden}
+.compat-fill{height:100%;border-radius:2px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.compat-pct{font-size:11px;color:rgba(184,147,63,0.7);width:32px;text-align:right;flex-shrink:0}
+
+/* ── Books section ── */
+.books-section{margin-bottom:28px}
+.book-item{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.05);
+}
+.book-item:last-child{border:none}
+.book-num{
+  width:24px;height:24px;border-radius:50%;
+  background:rgba(184,147,63,0.12);
+  border:0.5px solid rgba(184,147,63,0.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:#b8933f;font-weight:500;flex-shrink:0;margin-top:1px;
+}
+.book-info{}
+.book-title{font-size:13px;font-weight:500;color:rgba(245,234,208,0.8);font-family:'Noto Serif SC',serif;margin-bottom:3px}
+.book-reason{font-size:12px;color:rgba(245,234,208,0.4);line-height:1.6}
+
+/* ── Typewriter ── */
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.typewriter-cursor{display:inline-block;width:2px;height:1em;background:#b8933f;vertical-align:middle;animation:blink 0.9s ease infinite;margin-left:1px}
+
+/* ── Audio toggle ── */
+.audio-toggle{
+  position:fixed;bottom:20px;right:20px;z-index:50;
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(14,11,6,0.85);
+  border:0.5px solid rgba(184,147,63,0.3);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:15px;
+  transition:all 0.2s;
+  box-shadow:0 2px 12px rgba(0,0,0,0.4);
+}
+.audio-toggle:hover{border-color:rgba(184,147,63,0.6);background:rgba(30,22,10,0.9)}
+.audio-toggle.muted{opacity:0.5}
+
+/* ── Admin panel ── */
+.admin-panel{
+  position:fixed;inset:0;background:rgba(0,0,0,0.9);
+  z-index:300;display:none;flex-direction:column;
+  padding:24px;overflow-y:auto;
+}
+.admin-panel.open{display:flex}
+.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:14px;border-bottom:0.5px solid rgba(184,147,63,0.2)}
+.admin-title{font-family:'Noto Serif SC',serif;font-size:18px;color:#f5ead0;font-weight:700}
+.admin-close{background:none;border:none;color:rgba(245,234,208,0.4);font-size:20px;cursor:pointer}
+.admin-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+.stat-card{
+  background:rgba(255,255,255,0.04);border:0.5px solid rgba(184,147,63,0.15);
+  border-radius:6px;padding:12px;
+}
+.stat-lbl{font-size:10px;color:rgba(245,234,208,0.35);letter-spacing:0.1em;margin-bottom:4px}
+.stat-val{font-size:22px;font-weight:700;color:#f5ead0;font-family:'Noto Serif SC',serif}
+.admin-section-title{font-size:10px;letter-spacing:0.25em;color:#b8933f;text-transform:uppercase;margin-bottom:10px;font-weight:500}
+.admin-bar-item{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.admin-bar-label{font-size:12px;color:rgba(245,234,208,0.6);width:90px;flex-shrink:0;font-family:'Noto Serif SC',serif}
+.admin-bar-track{flex:1;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden}
+.admin-bar-fill{height:100%;background:linear-gradient(90deg,#b8933f,#d4ad5a);border-radius:3px}
+.admin-bar-count{font-size:11px;color:rgba(184,147,63,0.7);width:28px;text-align:right}
+.code-gen-section{margin-top:20px}
+.code-gen-row{display:flex;gap:8px;margin-bottom:12px}
+.code-gen-input{
+  flex:1;padding:10px 12px;background:rgba(255,255,255,0.05);
+  border:0.5px solid rgba(184,147,63,0.25);border-radius:4px;
+  color:#f5ead0;font-size:13px;font-family:'Noto Sans SC',sans-serif;outline:none;
+}
+.code-gen-btn{
+  padding:10px 16px;background:rgba(184,147,63,0.15);
+  border:0.5px solid rgba(184,147,63,0.4);border-radius:4px;
+  color:#b8933f;font-size:12px;cursor:pointer;white-space:nowrap;
+  font-family:'Noto Sans SC',sans-serif;transition:all 0.15s;
+}
+.code-gen-btn:hover{background:rgba(184,147,63,0.25)}
+.codes-list{
+  background:rgba(0,0,0,0.3);border:0.5px solid rgba(184,147,63,0.1);
+  border-radius:4px;padding:10px;max-height:160px;overflow-y:auto;
+  font-size:12px;color:rgba(245,234,208,0.5);font-family:monospace;
+  line-height:1.8;
+}
+.admin-entry{
+  position:fixed;bottom:80px;right:20px;z-index:50;
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(14,11,6,0.7);
+  border:0.5px solid rgba(255,255,255,0.08);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:13px;opacity:0.3;
+  transition:opacity 0.2s;
+}
+.admin-entry:hover{opacity:0.7}
+
+/* ── Result share-card-btn ── */
+.show-card-btn{
+  width:100%;padding:13px;
+  background:linear-gradient(135deg,#1a1208,#2d1a0a);
+  border:0.5px solid rgba(184,147,63,0.35);
+  border-radius:4px;color:rgba(245,234,208,0.8);
+  font-size:13px;cursor:pointer;letter-spacing:0.08em;
+  font-family:'Noto Sans SC',sans-serif;margin-top:10px;
+  transition:all 0.15s;
+}
+.show-card-btn:hover{border-color:rgba(184,147,63,0.6);color:#f5ead0}
+
+
+/* ── Floating particles on cover ── */
+.particle{
+  position:absolute;border-radius:50%;pointer-events:none;
+  animation:float-up linear infinite;opacity:0;
+}
+@keyframes float-up{
+  0%{opacity:0;transform:translateY(0) scale(0.5)}
+  10%{opacity:0.6}
+  80%{opacity:0.3}
+  100%{opacity:0;transform:translateY(-120px) scale(1.2)}
+}
+
+/* ── Cover entrance animation ── */
+.cover-content{animation:cover-in 0.9s cubic-bezier(.2,.8,.3,1) both}
+@keyframes cover-in{
+  from{opacity:0;transform:translateY(28px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.cover-title{animation:cover-in 1s 0.1s cubic-bezier(.2,.8,.3,1) both}
+.cover-subtitle{animation:cover-in 1s 0.2s cubic-bezier(.2,.8,.3,1) both}
+.start-btn{animation:cover-in 1s 0.35s cubic-bezier(.2,.8,.3,1) both}
+
+/* ── Result reveal ── */
+.res-hero{animation:hero-in 0.7s cubic-bezier(.2,.8,.3,1) both}
+@keyframes hero-in{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.res-body{animation:hero-in 0.7s 0.15s cubic-bezier(.2,.8,.3,1) both}
+
+/* ── Toast notification ── */
+.toast{
+  position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-60px);
+  background:#1a1208;border:0.5px solid rgba(184,147,63,0.4);
+  border-radius:20px;padding:10px 20px;
+  font-size:13px;color:rgba(245,234,208,0.85);
+  z-index:500;transition:transform 0.3s cubic-bezier(.2,.8,.3,1);
+  white-space:nowrap;pointer-events:none;
+  box-shadow:0 4px 20px rgba(0,0,0,0.5);
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ── Social proof strip ── */
+.social-proof{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 0 14px;
+  font-size:11px;color:rgba(245,234,208,0.35);
+  justify-content:center;
+}
+.social-avatars{display:flex}
+.social-avatar{
+  width:20px;height:20px;border-radius:50%;
+  background:rgba(184,147,63,0.2);
+  border:1.5px solid #1a1208;
+  margin-left:-6px;font-size:9px;
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(184,147,63,0.7);
+}
+.social-avatar:first-child{margin-left:0}
+
+/* ── Character color themes per type ── */
+.badge-悲剧智者型{background:rgba(83,74,183,0.15);color:#a09ae8;border-color:rgba(83,74,183,0.3)}
+.badge-敏感诗人型{background:rgba(183,74,116,0.15);color:#e09ab8;border-color:rgba(183,74,116,0.3)}
+.badge-独立精神型{background:rgba(29,158,117,0.15);color:#5fcfaa;border-color:rgba(29,158,117,0.3)}
+.badge-梦想执念型{background:rgba(186,117,23,0.15);color:#e0a840;border-color:rgba(186,117,23,0.3)}
+.badge-思想叛逆型{background:rgba(163,45,45,0.15);color:#e07070;border-color:rgba(163,45,45,0.3)}
+.badge-执念战士型{background:rgba(130,90,20,0.15);color:#c8882a;border-color:rgba(130,90,20,0.3)}
+.badge-浪漫骑士型{background:rgba(74,130,183,0.15);color:#7ab8e8;border-color:rgba(74,130,183,0.3)}
+.badge-情欲殉道型{background:rgba(163,45,100,0.15);color:#e070a8;border-color:rgba(163,45,100,0.3)}
+.badge-野心攀登型{background:rgba(80,80,80,0.15);color:#b0b0b0;border-color:rgba(80,80,80,0.3)}
+
+/* ── Loading upgrade ── */
+#screen-loading{
+  background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(184,147,63,0.08) 0%,#0e0b06 70%);
+}
+.loading-book{
+  font-size:48px;margin-bottom:24px;
+  animation:book-float 2s ease-in-out infinite;
+}
+@keyframes book-float{
+  0%,100%{transform:translateY(0) rotate(-2deg)}
+  50%{transform:translateY(-8px) rotate(2deg)}
+}
+
+/* ── Mobile font tuning ── */
+@media(max-width:380px){
+  .cover-title{font-size:2rem}
+  .res-name{font-size:2.4rem}
+  .q-text{font-size:16px}
+}
+@media(min-width:420px){
+  .cover-title{font-size:3rem}
+}
+
+/* ── Swipe hint on quiz ── */
+.swipe-hint{
+  font-size:11px;color:rgba(107,94,74,0.5);
+  text-align:center;padding:4px 0 12px;
+  letter-spacing:0.05em;
+}
+
+/* ── Quiz option micro-anim ── */
+.opt{transition:all 0.15s cubic-bezier(.2,.8,.3,1)}
+.opt:active{transform:scale(0.98)}
+.opt.selected{box-shadow:0 0 0 1px rgba(184,147,63,0.3)}
+
+/* ── Paywall social proof ── */
+.paywall-social{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:8px 0 4px;
+  font-size:11px;color:rgba(245,234,208,0.3);
+}
+
+/* ── Unlock success animation ── */
+@keyframes unlock-pop{
+  0%{transform:scale(0.9);opacity:0}
+  60%{transform:scale(1.05)}
+  100%{transform:scale(1);opacity:1}
+}
+.full-report.unlocking{animation:unlock-pop 0.45s cubic-bezier(.2,.8,.3,1) both}
+
+/* ── Character emoji icons ── */
+.char-emoji{font-size:28px;margin-bottom:8px;display:block}
+
+/* ── Result score badge ── */
+.result-score-wrap{
+  position:absolute;top:16px;right:16px;
+  background:rgba(184,147,63,0.12);
+  border:0.5px solid rgba(184,147,63,0.25);
+  border-radius:20px;padding:4px 12px;
+  font-size:11px;color:rgba(184,147,63,0.7);
+  font-family:"Noto Serif SC",serif;
+}
+
+/* ── Progress save banner ── */
+.save-banner{
+  background:rgba(29,158,117,0.1);
+  border-top:0.5px solid rgba(29,158,117,0.2);
+  padding:8px 16px;text-align:center;
+  font-size:11px;color:rgba(95,207,170,0.6);
+  letter-spacing:0.05em;display:none;
+}
+.save-banner.show{display:block}
+
+/* ── Share card canvas preview label ── */
+.card-hint{
+  text-align:center;font-size:11px;
+  color:rgba(245,234,208,0.3);padding:8px 16px 0;
+  letter-spacing:0.05em;
+}
+
+
+/* ══ PAYMENT SCREEN ══ */
+.pay-screen{
+  position:fixed;inset:0;z-index:150;
+  background:#0e0b06;
+  display:none;flex-direction:column;
+  overflow-y:auto;
+}
+.pay-screen.open{display:flex}
+.pay-header{
+  padding:18px 20px 14px;
+  display:flex;align-items:center;gap:12px;
+  border-bottom:0.5px solid rgba(184,147,63,0.12);
+  position:sticky;top:0;background:#0e0b06;z-index:2;
+}
+.pay-back{
+  background:none;border:none;color:rgba(245,234,208,0.45);
+  font-size:18px;cursor:pointer;padding:0 4px;line-height:1;
+}
+.pay-header-title{
+  font-family:'Noto Serif SC',serif;
+  font-size:16px;font-weight:600;color:#f5ead0;
+}
+.pay-body{padding:24px 22px;flex:1}
+
+/* order summary */
+.pay-order{
+  background:rgba(255,255,255,0.03);
+  border:0.5px solid rgba(184,147,63,0.15);
+  border-radius:8px;padding:16px;margin-bottom:20px;
+}
+.pay-order-row{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;padding:6px 0;
+}
+.pay-order-label{color:rgba(245,234,208,0.45)}
+.pay-order-value{color:rgba(245,234,208,0.8);font-weight:500}
+.pay-order-total{
+  border-top:0.5px solid rgba(184,147,63,0.12);
+  margin-top:6px;padding-top:10px;
+}
+.pay-order-total .pay-order-label{color:rgba(245,234,208,0.7)}
+.pay-order-total .pay-order-value{
+  font-size:20px;font-family:'Noto Serif SC',serif;
+  font-weight:700;color:#d4ad5a;
+}
+
+/* payment methods */
+.pay-methods{margin-bottom:20px}
+.pay-methods-title{
+  font-size:11px;letter-spacing:0.2em;color:rgba(184,147,63,0.6);
+  text-transform:uppercase;margin-bottom:10px;font-weight:500;
+}
+.pay-method-tabs{display:flex;gap:8px;margin-bottom:16px}
+.pay-method-tab{
+  flex:1;padding:10px 8px;
+  background:rgba(255,255,255,0.03);
+  border:0.5px solid rgba(255,255,255,0.1);
+  border-radius:6px;text-align:center;cursor:pointer;
+  font-size:13px;color:rgba(245,234,208,0.5);
+  transition:all 0.15s;
+}
+.pay-method-tab.active{
+  border-color:rgba(184,147,63,0.5);
+  background:rgba(184,147,63,0.08);
+  color:rgba(245,234,208,0.85);
+}
+.pay-method-tab span{display:block;font-size:17px;margin-bottom:3px}
+
+/* QR code area */
+.qr-wrap{
+  background:rgba(255,255,255,0.03);
+  border:0.5px solid rgba(184,147,63,0.15);
+  border-radius:10px;padding:20px;
+  text-align:center;margin-bottom:16px;
+}
+.qr-placeholder{
+  width:180px;height:180px;margin:0 auto 14px;
+  background:#fff;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.qr-inner-canvas{width:100%;height:100%}
+.qr-amount-badge{
+  display:inline-block;
+  background:rgba(184,147,63,0.15);
+  border:0.5px solid rgba(184,147,63,0.35);
+  border-radius:20px;padding:5px 16px;
+  font-size:15px;font-weight:700;
+  color:#d4ad5a;font-family:'Noto Serif SC',serif;
+  margin-bottom:10px;
+}
+.qr-instruction{
+  font-size:12px;color:rgba(245,234,208,0.4);
+  line-height:1.7;
+}
+.qr-instruction strong{color:rgba(245,234,208,0.7)}
+
+/* steps */
+.pay-steps{
+  display:flex;gap:0;margin-bottom:20px;
+  position:relative;
+}
+.pay-steps::before{
+  content:'';position:absolute;
+  top:16px;left:16px;right:16px;height:0.5px;
+  background:rgba(184,147,63,0.15);
+}
+.pay-step{flex:1;text-align:center;position:relative;z-index:1}
+.pay-step-num{
+  width:32px;height:32px;border-radius:50%;
+  background:#1a1208;
+  border:0.5px solid rgba(184,147,63,0.3);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 6px;
+  font-size:12px;color:rgba(184,147,63,0.7);font-weight:500;
+}
+.pay-step.done .pay-step-num{
+  background:rgba(184,147,63,0.15);
+  border-color:rgba(184,147,63,0.6);
+  color:#d4ad5a;
+}
+.pay-step-label{font-size:10px;color:rgba(245,234,208,0.35);letter-spacing:0.05em}
+
+/* code entry */
+.pay-code-section{margin-bottom:12px}
+.pay-code-label{
+  font-size:12px;color:rgba(245,234,208,0.5);
+  margin-bottom:8px;display:flex;align-items:center;gap:6px;
+}
+.pay-code-input-row{display:flex;gap:8px}
+.pay-code-input{
+  flex:1;padding:13px 14px;
+  background:rgba(255,255,255,0.05);
+  border:0.5px solid rgba(184,147,63,0.25);
+  border-radius:6px;color:#f5ead0;font-size:15px;
+  font-family:'Noto Sans SC',sans-serif;
+  outline:none;letter-spacing:0.25em;text-align:center;
+  text-transform:uppercase;
+}
+.pay-code-input:focus{border-color:rgba(184,147,63,0.5)}
+.pay-code-btn{
+  padding:13px 18px;
+  background:linear-gradient(135deg,#b8933f,#d4ad5a);
+  color:#0e0b06;border:none;border-radius:6px;
+  font-family:'Noto Serif SC',serif;font-size:14px;font-weight:700;
+  cursor:pointer;transition:opacity 0.15s;white-space:nowrap;
+}
+.pay-code-btn:hover{opacity:0.9}
+.pay-code-err{font-size:12px;color:#e07070;min-height:18px;margin-top:6px;padding-left:2px}
+
+/* help text */
+.pay-help{
+  font-size:12px;color:rgba(245,234,208,0.3);
+  line-height:1.8;text-align:center;padding:4px 0 16px;
+}
+.pay-help a{color:rgba(184,147,63,0.5);text-decoration:none}
+
+/* custom QR note */
+.qr-custom-note{
+  background:rgba(184,147,63,0.06);
+  border:0.5px dashed rgba(184,147,63,0.2);
+  border-radius:6px;padding:10px 14px;
+  font-size:11px;color:rgba(245,234,208,0.35);
+  line-height:1.7;margin-bottom:14px;text-align:center;
+}
+.qr-custom-note strong{color:rgba(184,147,63,0.5)}
+
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- ══ COVER ══ -->
+<div class="screen active" id="screen-cover">
+  <div class="cover-bg"></div>
+  <canvas id="cover-canvas" style="position:absolute;inset:0;pointer-events:none;opacity:0.5"></canvas>
+  <div class="cover-lines"></div>
+  <div class="cover-content">
+    <div class="cover-eyebrow">文学人物测验</div>
+    <div class="cover-title">你藏着<br>哪位<span>文学</span><br>灵魂？</div>
+    <div class="cover-subtitle">经典名著 · 人格映射 · 深度解析</div>
+    <div class="cover-divider">
+      <span></span><i></i><span></span>
+    </div>
+    <div class="cover-desc">通过10道场景题，揭示你与哪位经典文学人物拥有相同的灵魂底色——你是孤傲的黛玉、迷茫的哈姆雷特，还是自由的简·爱？</div>
+    <div class="cover-meta">
+      <div class="cover-meta-item"><span class="cover-meta-dot"></span>共10题</div>
+      <div class="cover-meta-item"><span class="cover-meta-dot"></span>约3分钟</div>
+      <div class="cover-meta-item"><span class="cover-meta-dot"></span>9种结果</div>
+    </div>
+    <button class="start-btn" id="btn-start">开始测试</button>
+  </div>
+  <div class="cover-footer">本测试基于人格心理学与文学分析 · 仅供娱乐参考</div>
+</div>
+
+<!-- ══ QUIZ ══ -->
+<div class="screen" id="screen-quiz">
+  <div class="quiz-header">
+    <div class="quiz-header-top">
+      <span class="q-counter" id="q-counter">第 1 题 / 共 10 题</span>
+      <span class="q-pct" id="q-pct">0%</span>
+    </div>
+    <div class="prog-track"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+  </div>
+  <div class="save-banner" id="save-banner">进度已自动保存</div>
+  <div class="quiz-body">
+    <div class="q-num" id="q-num">第一题</div>
+    <div class="q-text" id="q-text"></div>
+    <div class="options" id="options"></div>
+  </div>
+  <div class="swipe-hint" id="swipe-hint">选择后点击下一题</div>
+  <div class="quiz-footer">
+    <button class="nav-btn btn-back" id="btn-back">← 上一题</button>
+    <button class="nav-btn btn-next" id="btn-next" disabled>下一题 →</button>
+  </div>
+</div>
+
+<!-- ══ LOADING ══ -->
+<div class="screen" id="screen-loading">
+  <div class="loading-book">📖</div>
+  <div class="loading-text" id="loading-text">正在匹配你的文学灵魂…</div>
+  <div class="loading-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+</div>
+
+<!-- ══ RESULT ══ -->
+<div class="screen" id="screen-result">
+  <div class="res-hero">
+    <div class="res-hero-glow"></div>
+    <div class="result-score-wrap" id="r-score-badge">灵魂匹配度 —</div>
+    <span class="char-emoji" id="r-emoji">📚</span>
+    <div class="res-badge" id="r-badge">悲剧智者型</div>
+    <div class="res-name" id="r-name">哈姆雷特</div>
+    <div class="res-origin" id="r-origin">《哈姆雷特》· 莎士比亚</div>
+    <div class="res-tagline" id="r-tagline">"生存还是毁灭，这是一个问题。"</div>
+  </div>
+
+  <div class="res-body">
+    <div class="res-section">
+      <div class="res-section-title">性格维度</div>
+      <div class="trait-grid" id="r-traits"></div>
+    </div>
+    <div class="res-section">
+      <div class="res-section-title">灵魂预览</div>
+      <div class="res-desc-preview" id="r-preview">
+        <p id="r-preview-text"></p>
+        <div class="res-blur-overlay">
+          <span class="res-blur-label">解锁完整解析 ↓</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAYWALL -->
+  <div class="paywall" id="paywall">
+    <div class="countdown-bar" id="countdown-bar">
+      <span class="cd-icon">⏳</span>
+      <span class="cd-text">限时优惠价，剩余时间</span>
+      <span class="cd-time" id="cd-time">29:59</span>
+    </div>
+    <div class="share-unlock" id="share-unlock">
+      <div class="share-unlock-title">🎁 分享解锁免费报告</div>
+      <div class="share-unlock-sub">把测试链接分享给3位朋友<br>即可免费解锁完整灵魂报告</div>
+      <div class="share-steps">
+        <div class="share-step"><strong>1</strong>复制链接</div>
+        <div class="share-step"><strong>2</strong>发给好友</div>
+        <div class="share-step"><strong>3</strong>自动解锁</div>
+      </div>
+      <div class="share-progress-row">
+        <span class="share-prog-label">已分享</span>
+        <span class="share-prog-count"><span id="share-count">0</span> / 3 人</span>
+      </div>
+      <div class="share-prog-track"><div class="share-prog-fill" id="share-prog" style="width:0%"></div></div>
+      <button class="share-btn" id="btn-share">复制链接并分享 →</button>
+    </div>
+    <div class="paywall-top">
+      <div class="paywall-lock">🔒</div>
+      <div class="paywall-title">解锁完整灵魂报告</div>
+      <div class="paywall-sub">前半段只是开始<br>你真正的灵魂底色藏在这里</div>
+    </div>
+    <div class="paywall-features">
+      <div class="feature-item"><span class="feature-dot"></span>深度灵魂解析（600字）</div>
+      <div class="feature-item"><span class="feature-dot"></span>5大人格维度雷达分析</div>
+      <div class="feature-item"><span class="feature-dot"></span>专属成长建议与人生忠告</div>
+      <div class="feature-item"><span class="feature-dot"></span>同类文学人物与你的异同</div>
+      <div class="feature-item"><span class="feature-dot"></span>你与其他7种人物的契合度</div>
+    </div>
+    <div class="paywall-cta">
+      <div class="price-row">
+        <span class="price-main">¥9.9</span>
+        <span class="price-unit">/ 次</span>
+        <span class="price-original">¥29.9</span>
+      </div>
+      <div class="paywall-social">
+        <div class="social-avatars">
+          <div class="social-avatar">文</div>
+          <div class="social-avatar">学</div>
+          <div class="social-avatar">魂</div>
+        </div>
+        <span>已有 <strong style="color:rgba(184,147,63,0.7)">2,847</strong> 人解锁了完整报告</span>
+      </div>
+      <button class="unlock-btn" id="btn-unlock">立即解锁 · 永久保存</button>
+      <div class="unlock-hint">支付后获得专属解锁码 · 截图永久有效</div>
+    </div>
+  </div>
+
+  <!-- FULL REPORT (hidden until unlock) -->
+  <div class="full-report" id="full-report">
+    <div class="report-section">
+      <div class="report-section-title">深度灵魂解析</div>
+      <div class="full-desc" id="r-full-desc"></div>
+    </div>
+    <div class="report-section">
+      <div class="report-section-title">人格维度分析</div>
+      <div id="r-dims"></div>
+    </div>
+    <div class="report-section">
+      <div class="report-section-title">专属成长建议</div>
+      <div id="r-advice"></div>
+    </div>
+    <div class="report-section">
+      <div class="report-section-title">同频文学灵魂</div>
+      <div class="peer-row" id="r-peers"></div>
+    </div>
+    <div class="report-section compat-section">
+      <div class="report-section-title">与其他灵魂的契合度</div>
+      <div id="r-compat"></div>
+    </div>
+    <div class="report-section books-section">
+      <div class="report-section-title">为你推荐的三本书</div>
+      <div id="r-books"></div>
+    </div>
+    <div class="share-strip">
+      <p>截图发到小红书<br><strong>#你是哪位文学灵魂</strong><br>和朋友一起测测</p>
+    </div>
+    <button class="show-card-btn" id="btn-show-card">生成我的专属人物卡片 ✦</button>
+  </div>
+
+  <div class="retry-row">
+    <button class="retry-btn-full" id="btn-retry">重新测试 →</button>
+  </div>
+</div>
+
+
+<!-- ══ SHARE CARD OVERLAY ══ -->
+<div class="card-screen" id="card-screen">
+  <div class="share-card" id="share-card">
+    <div class="card-glow"></div>
+    <button class="card-close" id="btn-card-close">✕</button>
+    <div class="card-top">
+      <div class="card-eyebrow">文学灵魂测验结果</div>
+      <div class="card-char-name" id="card-name">哈姆雷特</div>
+      <div class="card-char-type" id="card-type">悲剧智者型</div>
+      <div class="card-divider"></div>
+      <div class="card-quote" id="card-quote"></div>
+    </div>
+    <div class="card-traits-row" id="card-traits"></div>
+    <div class="card-footer">
+      <span class="card-footer-brand">文学灵魂测验</span>
+      <span class="card-footer-tag">#你是哪位文学灵魂</span>
+    </div>
+    <div class="card-hint">长按卡片保存图片 · 或截图发布小红书</div>
+    <div class="card-actions">
+      <button class="card-act-btn card-act-primary" id="btn-card-share">截图保存并分享到小红书</button>
+      <button class="card-act-btn card-act-secondary" id="btn-card-close2">关闭</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PAYMENT SCREEN ══ -->
+<div class="pay-screen" id="pay-screen">
+  <div class="pay-header">
+    <button class="pay-back" id="btn-pay-back">←</button>
+    <span class="pay-header-title">完成支付 · 获取解锁码</span>
+  </div>
+  <div class="pay-body">
+
+    <!-- step indicator -->
+    <div class="pay-steps" style="margin-bottom:24px">
+      <div class="pay-step done">
+        <div class="pay-step-num">1</div>
+        <div class="pay-step-label">查看结果</div>
+      </div>
+      <div class="pay-step done">
+        <div class="pay-step-num">2</div>
+        <div class="pay-step-label">选择解锁</div>
+      </div>
+      <div class="pay-step">
+        <div class="pay-step-num">3</div>
+        <div class="pay-step-label">扫码付款</div>
+      </div>
+      <div class="pay-step">
+        <div class="pay-step-num">4</div>
+        <div class="pay-step-label">输入码解锁</div>
+      </div>
+    </div>
+
+    <!-- order summary -->
+    <div class="pay-order">
+      <div class="pay-order-row">
+        <span class="pay-order-label">商品</span>
+        <span class="pay-order-value">完整灵魂报告（永久）</span>
+      </div>
+      <div class="pay-order-row">
+        <span class="pay-order-label">原价</span>
+        <span class="pay-order-value" style="text-decoration:line-through;color:rgba(245,234,208,0.3)">¥29.9</span>
+      </div>
+      <div class="pay-order-row pay-order-total">
+        <span class="pay-order-label">限时优惠价</span>
+        <span class="pay-order-value">¥9.9</span>
+      </div>
+    </div>
+
+    <!-- payment method tabs -->
+    <div class="pay-methods">
+      <div class="pay-methods-title">选择付款方式</div>
+      <div class="pay-method-tabs">
+        <div class="pay-method-tab active" id="tab-wechat" data-method="wechat">
+          <span>💚</span>微信支付
+        </div>
+        <div class="pay-method-tab" id="tab-alipay" data-method="alipay">
+          <span>💙</span>支付宝
+        </div>
+      </div>
+
+      <!-- QR area -->
+      <div class="qr-custom-note">
+        ⬇ 请将下方二维码替换为你的<strong>真实收款码</strong><br>
+        替换方法见配套运营文档
+      </div>
+      <div class="qr-wrap">
+        <div class="qr-amount-badge">¥9.9</div>
+        <div class="qr-placeholder" id="qr-placeholder">
+          <!-- 真实二维码图片放这里 -->
+          <!-- <img src="your-qrcode.jpg" style="width:100%;height:100%;object-fit:cover"> -->
+          <canvas id="qr-canvas" class="qr-inner-canvas"></canvas>
+        </div>
+        <div class="qr-instruction">
+          <strong id="qr-method-name">微信</strong>扫描上方二维码付款<br>
+          付款备注：<strong>文学测验</strong><br>
+          收到付款后博主将在 <strong>5分钟内</strong> 私信你解锁码
+        </div>
+      </div>
+    </div>
+
+    <!-- code entry -->
+    <div class="pay-code-section">
+      <div class="pay-code-label">收到解锁码后输入这里</div>
+      <div class="pay-code-input-row">
+        <input class="pay-code-input" id="pay-code-input" placeholder="6位解锁码" maxlength="6">
+        <button class="pay-code-btn" id="btn-pay-confirm">解锁</button>
+      </div>
+      <div class="pay-code-err" id="pay-code-err"></div>
+    </div>
+
+    <div class="pay-help">
+      未收到解锁码？<br>
+      请截图付款记录私信博主，或重新测试后点击解锁<br>
+      <span style="color:rgba(184,147,63,0.4)">解锁码永久有效，截图保存可多次使用</span>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- #app -->
+
+
+<button class="audio-toggle" id="btn-audio" title="背景音效">♪</button>
+<button class="admin-entry" id="btn-admin-entry" title="管理后台">⚙</button>
+
+<div class="toast" id="toast"></div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <h3>输入解锁码</h3>
+    <p>购买后将收到6位解锁码<br>输入即可查看完整报告</p>
+    <div class="modal-err" id="modal-err"></div>
+    <input class="modal-input" id="code-input" placeholder="请输入解锁码" maxlength="6">
+    <button class="modal-confirm" id="btn-confirm">确认解锁</button>
+    <button class="modal-cancel" id="btn-cancel">暂不解锁</button>
+  </div>
+</div>
+
+<script>
+const QS=[
+  {t:'深夜，你独自面对人生中最难的抉择，你首先会——',
+   o:[{t:'反复思考，权衡所有可能，却迟迟无法下定决心',s:{hamlet:3,raskolnikov:1}},
+      {t:'相信直觉，果断行动，后果自负',s:{janeyre:2,ahab:2}},
+      {t:'把痛苦化成文字，让情感得到释放',s:{daiyu:3,quixote:1}},
+      {t:'寻找规律与秩序，用理性找到最优解',s:{raskolnikov:2,gatsby:1}}]},
+  {t:'当你深爱的人选择离开，你的第一反应是——',
+   o:[{t:'默默承受，将悲痛压入心底',s:{daiyu:3,janeyre:1}},
+      {t:'追问原因，彻底搞清楚问题所在',s:{hamlet:2,raskolnikov:2}},
+      {t:'执着等待，相信终有一天能够挽回',s:{gatsby:3,ahab:1}},
+      {t:'选择放下，告诉自己生活还要继续',s:{janeyre:2,quixote:1}}]},
+  {t:'如果可以选择人生使命，你会选择——',
+   o:[{t:'追求完美的爱情，哪怕粉身碎骨',s:{daiyu:2,gatsby:2,anna:3}},
+      {t:'探索生命的终极意义，无论代价多高',s:{hamlet:2,raskolnikov:2}},
+      {t:'凭借意志实现某个近乎疯狂的目标',s:{ahab:3,quixote:1}},
+      {t:'做真实的自己，守护尊严与独立',s:{janeyre:3,raskolnikov:1,anna:1}}]},
+  {t:'在重要社交场合，你通常是——',
+   o:[{t:'躲在角落，默默观察，内心敏感细腻',s:{daiyu:3,hamlet:1}},
+      {t:'表面从容，内心不断分析每个人的动机',s:{raskolnikov:2,hamlet:2}},
+      {t:'全力展现自己，这是接近梦想的机会',s:{gatsby:3,quixote:1,julien:2}},
+      {t:'直接真诚，不擅长伪装，宁愿沉默',s:{janeyre:2,ahab:1}}]},
+  {t:'面对不公正的社会规则，你倾向于——',
+   o:[{t:'内心抗议，却很难真正付诸行动',s:{hamlet:3,daiyu:1}},
+      {t:'用自己的方式悄悄打破它，哪怕危险',s:{raskolnikov:3,janeyre:1}},
+      {t:'坦然说出不满，不畏惧他人眼光',s:{janeyre:3,ahab:1}},
+      {t:'用幽默消解它，或假装它不存在',s:{quixote:3,gatsby:1}}]},
+  {t:'当一段美好的过去已无法复现，你会——',
+   o:[{t:'用尽力量试图重建那个时刻',s:{gatsby:3,ahab:1}},
+      {t:'让它成为心中永恒的伤，用诗意纪念',s:{daiyu:3,quixote:1}},
+      {t:'理性接受，向前看，不沉溺于旧日',s:{janeyre:2,raskolnikov:1}},
+      {t:'反复追问：这一切究竟有什么意义？',s:{hamlet:3,raskolnikov:1}}]},
+  {t:'你最害怕的事情是——',
+   o:[{t:'被人轻视嘲讽，觉得自己一无是处',s:{daiyu:3,raskolnikov:1}},
+      {t:'碌碌无为，一生平庸，没留下任何痕迹',s:{gatsby:2,ahab:2,julien:2}},
+      {t:'虚伪地活着，做连自己都不认识的人',s:{janeyre:3,hamlet:1}},
+      {t:'错过真相，始终活在自己构建的幻觉中',s:{hamlet:2,quixote:2}}]},
+  {t:'如果你有一种神秘力量，你最想用它来——',
+   o:[{t:'让时间倒流，修复所有遗憾',s:{gatsby:2,daiyu:2}},
+      {t:'洞察人心，看穿一切谎言与虚伪',s:{hamlet:2,raskolnikov:2,julien:2}},
+      {t:'征服某个无法征服之物，哪怕是命运',s:{ahab:3,quixote:1}},
+      {t:'创造一个公平充满爱的世界',s:{janeyre:2,quixote:2}}]},
+  {t:'读完一本让你心碎的书，你会——',
+   o:[{t:'沉浸在悲伤里很久，感同身受难以自拔',s:{daiyu:3,hamlet:1,anna:2}},
+      {t:'激动地想与人分享，讨论它的深层意义',s:{raskolnikov:2,hamlet:2}},
+      {t:'从中汲取力量，思考主人公本可怎么做',s:{janeyre:2,gatsby:1}},
+      {t:'莞尔一笑，感叹人类的荒诞与可爱',s:{quixote:3,ahab:1}}]},
+  {t:'你觉得自己和周围世界的关系是——',
+   o:[{t:'格格不入，仿佛永远是个局外人',s:{daiyu:2,raskolnikov:2}},
+      {t:'充满矛盾，一边渴望融入，一边无法妥协',s:{hamlet:2,janeyre:2}},
+      {t:'充满激情，渴望改变它，哪怕付出一切',s:{gatsby:2,ahab:2}},
+      {t:'荒诞而美好，我是在其中寻找诗意的骑士',s:{quixote:3,daiyu:1}}]}
+];
+
+const CHARS={
+  hamlet:{
+    name:'哈姆雷特',badge:'悲剧智者型',
+    origin:'《哈姆雷特》· 莎士比亚',
+    tagline:'\u201c生存还是毁灭，这是一个问题。——而你，正是那个敢于直视问题的人。\u201d',
+    traits:[{l:'核心气质',v:'忧郁·深沉'},{l:'思维方式',v:'辩证·反省'},{l:'内心渴望',v:'真相与公正'},{l:'致命弱点',v:'行动力不足'}],
+    preview:'你拥有极其敏锐的洞察力与哲学性的思维，习惯于在行动前反复追问意义。你不满足于表面答案，总能看到旁人忽视的深层矛盾……',
+    full:'<p>你拥有极其敏锐的洞察力与哲学性的思维，习惯于在行动前反复追问意义。你不满足于表面答案，总能看到旁人忽视的深层矛盾。这种深度是你的天赋，也是你的负担——你的痛苦往往来自看得太清楚。</p><p>在你的内心世界里，怀疑与执行之间永远存在一条鸿沟。你不是胆怯，你只是无法接受那些简单的理由。你对世界有一种近乎洁癖的高标准，这让你成为极佳的思考者，却在行动层面反复拉扯。</p><p>你与他人连接的方式是智识上的共鸣，你需要能与你在深处对话的人。你时常感到孤独，不是因为身边无人，而是因为真正懂你的人实在太少。</p>',
+    dims:[{l:'感性',r:'理性',p:45},{l:'内向',r:'外向',p:20},{l:'保守',r:'激进',p:60},{l:'顺从',r:'反叛',p:65},{l:'自省',r:'行动',p:25}],
+    advice:[{h:'关于行动',b:'允许自己在条件不够完美时迈出第一步。深思是礼物，但不完美的行动胜过完美的等待。'},{h:'关于人际',b:'试着把你的思考分享给信任的人——你的深度不是负担，而是罕见的礼物，值得被看见。'}],
+    peers:['伊阿古','麦克白','波伏瓦'],
+    books:[{t:'哈姆雷特',a:'莎士比亚',r:'原著精读，你的灵魂底稿'},{t:'存在主义咖啡馆',a:'萨拉·贝克韦尔',r:'理解你的哲学气质'},{t:'荒原狼',a:'赫尔曼·黑塞',r:'另一个与世界格格不入的灵魂'}],
+    compat:{raskolnikov:85,daiyu:60,janeyre:45,gatsby:30,ahab:35,quixote:50,anna:40,julien:70}
+  },
+  daiyu:{
+    name:'林黛玉',badge:'敏感诗人型',
+    origin:'《红楼梦》· 曹雪芹',
+    tagline:'\u201c花谢花飞飞满天，红消香断有谁怜？——你的心，装得下整个世界的悲喜。\u201d',
+    traits:[{l:'核心气质',v:'灵秀·敏感'},{l:'思维方式',v:'感性·诗意'},{l:'内心渴望',v:'被理解与真爱'},{l:'致命弱点',v:'过于在意他人'}],
+    preview:'你有一颗极细腻的心，能感受到他人察觉不到的情绪变化与美感。你的内心是一座诗意的花园，装满了对美的渴望与对逝去的哀愁……',
+    full:'<p>你有一颗极细腻的心，能感受到他人察觉不到的情绪变化与美感。你的内心是一座诗意的花园，装满了对美的渴望与对逝去的哀愁。你不擅长在人前表现坚强，却以自己的敏感构建出无与伦比的精神世界。</p><p>你对爱有极高的纯粹性要求，宁愿清高孤独，也不愿将就。你的眼泪不是软弱，是情感的深度。你对美的感知是天才级别的——花开花落都能触动你，这种感受力让你的创造力远超常人。</p><p>你有时会过度解读他人的言行，将无心之语变成内心的风暴。学会区分哪些感知来自现实、哪些来自内心投射，是你一生的功课。</p>',
+    dims:[{l:'感性',r:'理性',p:12},{l:'内向',r:'外向',p:10},{l:'保守',r:'激进',p:30},{l:'顺从',r:'反叛',p:35},{l:'自省',r:'行动',p:20}],
+    advice:[{h:'关于情绪',b:'你的敏感是天赋，但也需要边界。试着给情绪一个容器——写作、绘画、音乐——让它流动，而非堆积。'},{h:'关于关系',b:'真正爱你的人不需要你一直坚强。学会开口说出自己的需要，是对这段关系最深的信任。'}],
+    peers:['安娜·卡列尼娜','爱玛·包法利','叶赛宁'],
+    books:[{t:'红楼梦',a:'曹雪芹',r:'你的母本，必读原著'},{t:'纯真年代',a:'伊迪丝·华顿',r:'另一个为时代所困的灵魂'},{t:'敏感的人',a:'伊尔斯·桑德',r:'读懂你的敏感是天赋不是弱点'}],
+    compat:{anna:80,hamlet:60,raskolnikov:40,janeyre:35,gatsby:50,ahab:20,quixote:45,julien:30}
+  },
+  janeyre:{
+    name:'简·爱',badge:'独立精神型',
+    origin:'《简·爱》· 夏洛蒂·勃朗特',
+    tagline:'\u201c我贫穷、低微、不美、矮小，但当我们的灵魂站在上帝面前，我们是平等的。\u201d',
+    traits:[{l:'核心气质',v:'坚韧·自尊'},{l:'思维方式',v:'直接·务实'},{l:'内心渴望',v:'平等与真实的爱'},{l:'致命弱点',v:'有时过于执拗'}],
+    preview:'你有一种罕见的精神独立性，不靠外貌、财富或他人的认可来定义自己的价值。你清楚地知道自己的底线在哪里，并且有勇气为之坚守……',
+    full:'<p>你有一种罕见的精神独立性，不靠外貌、财富或他人的认可来定义自己的价值。你清楚地知道自己的底线在哪里，并且有勇气为之坚守——哪怕代价是孤独。</p><p>你渴望真实的连接，而非表演式的感情。你对不公正有天然的敏感与反抗本能。你的力量不是来自声势，而是来自内心深处那份沉静的确信。</p><p>你有时会因为太过坚持原则而错过一些灵活的可能性。但这份执拗恰恰是你最宝贵的东西——在一个让人妥协的世界里，你选择了做自己。</p>',
+    dims:[{l:'感性',r:'理性',p:55},{l:'内向',r:'外向',p:42},{l:'保守',r:'激进',p:65},{l:'顺从',r:'反叛',p:72},{l:'自省',r:'行动',p:68}],
+    advice:[{h:'关于边界',b:'你很擅长守住底线，但也记得留一些弹性空间——不是每一场战斗都值得打到底，要分辨哪些是真正的核心原则。'},{h:'关于亲密',b:'你的独立是力量，但真正的亲密需要你允许自己被人照顾。偶尔的脆弱，不会削弱你的强大。'}],
+    peers:['斯嘉丽·奥哈拉','爱丽丝','娜拉'],
+    books:[{t:'简·爱',a:'夏洛蒂·勃朗特',r:'你的灵魂原型'},{t:'第二性',a:'西蒙·波伏瓦',r:'你骨子里的女性主义底色'},{t:'傲慢与偏见',a:'简·奥斯汀',r:'同样的独立内核，更多一份幽默'}],
+    compat:{anna:50,hamlet:45,raskolnikov:55,daiyu:35,gatsby:40,ahab:60,quixote:42,julien:48}
+  },
+  gatsby:{
+    name:'盖茨比',badge:'梦想执念型',
+    origin:'《了不起的盖茨比》· 菲茨杰拉德',
+    tagline:'\u201c他那非凡的天赋是怀有希望，一种浪漫主义的敏锐——我从未在旁人身上见过。\u201d',
+    traits:[{l:'核心气质',v:'执着·魅力'},{l:'思维方式',v:'目标导向·理想主义'},{l:'内心渴望',v:'重拾失去的完美'},{l:'致命弱点',v:'活在幻觉中'}],
+    preview:'你有一种令人着迷的信念感——你深信只要足够努力、足够执着，梦想终究会实现。你为自己构建了一个宏大的叙事，并愿意为之付出一切……',
+    full:'<p>你有一种令人着迷的信念感——你深信只要足够努力、足够执着，梦想终究会实现。你为自己构建了一个宏大的叙事，并愿意为之付出一切。你的魅力很大程度上来自这种近乎疯狂的坚持。</p><p>然而，你有时会爱上自己对某人或某事的想象，而非真实本身。当现实终于出现在面前，它往往比不上你心中那道绿光——这是你的悲剧所在。</p><p>你的伟大，藏着你的悲剧。但正因如此，你的存在让这个世界更有诗意。</p>',
+    dims:[{l:'感性',r:'理性',p:40},{l:'内向',r:'外向',p:70},{l:'保守',r:'激进',p:75},{l:'顺从',r:'反叛',p:60},{l:'自省',r:'行动',p:78}],
+    advice:[{h:'关于目标',b:'在追逐绿光之前，停下来问问自己：我爱的是那个人本身，还是我对它的幻想？答案会改变你前进的方向。'},{h:'关于当下',b:'你擅长活在未来，但最珍贵的此刻，正在你追逐的路上悄悄流逝。'}],
+    peers:['娜塔莎·罗斯托娃','冉阿让','于连·索雷尔'],
+    books:[{t:'了不起的盖茨比',a:'菲茨杰拉德',r:'你的镜像，请反复阅读'},{t:'追忆似水年华',a:'普鲁斯特',r:'同样痴迷于过去的文学巨作'},{t:'挪威的森林',a:'村上春树',r:'另一种绿光，另一种无法企及'}],
+    compat:{anna:55,hamlet:30,raskolnikov:35,daiyu:50,janeyre:40,ahab:45,quixote:38,julien:60}
+  },
+  raskolnikov:{
+    name:'拉斯柯尔尼科夫',badge:'思想叛逆型',
+    origin:'《罪与罚》· 陀思妥耶夫斯基',
+    tagline:'\u201c我并没有杀人，我只是消灭了一个原则。——你始终在寻找超越规则的理由。\u201d',
+    traits:[{l:'核心气质',v:'偏执·犀利'},{l:'思维方式',v:'批判·超越常规'},{l:'内心渴望',v:'证明自己不平凡'},{l:'致命弱点',v:'骄傲与自我怀疑并存'}],
+    preview:'你对世界有一套自己的逻辑体系，往往走在普通人理解的边界之外。你渴望证明自己不只是普通人，并常常用极端思维实验检验自己的信念……',
+    full:'<p>你对世界有一套自己的逻辑体系，往往走在普通人理解的边界之外。你渴望证明自己不只是普通人，并常常用极端的思维实验来检验自己的信念。</p><p>你对社会的伪善有强烈的厌恶感，却又无法完全脱离自己的良知与道德感。你内心深处的矛盾是你最真实的战场——思想的锋利与情感的柔软在你身上奇特地共存。</p><p>你需要的不是更多的分析，而是一个真正信任的人，让你允许自己软下来。</p>',
+    dims:[{l:'感性',r:'理性',p:35},{l:'内向',r:'外向',p:15},{l:'保守',r:'激进',p:85},{l:'顺从',r:'反叛',p:90},{l:'自省',r:'行动',p:40}],
+    advice:[{h:'关于自我',b:'你的智识是天赋，但注意不要用超越规则来为自己的痛苦寻找出口。有时候，接受帮助本身就是一种勇气。'},{h:'关于连接',b:'你不需要一直是最聪明的那个人。真正的连接发生在你卸下防御的时刻。'}],
+    peers:['齐奥拉纳','尼采','约伯'],
+    books:[{t:'罪与罚',a:'陀思妥耶夫斯基',r:'你的精神原典'},{t:'查拉图斯特拉如是说',a:'尼采',r:'你的思想有一半住在这里'},{t:'局外人',a:'加缪',r:'另一种反叛，更冷静的版本'}],
+    compat:{hamlet:85,julien:75,ahab:60,janeyre:55,gatsby:35,daiyu:40,quixote:30,anna:45}
+  },
+  ahab:{
+    name:'埃哈伯船长',badge:'执念战士型',
+    origin:'《白鲸》· 赫尔曼·梅尔维尔',
+    tagline:'\u201c我会越过太阳追击你，越过地狱的火焰，直到你失去气息。\u201d',
+    traits:[{l:'核心气质',v:'狂热·不屈'},{l:'思维方式',v:'极端·目标单一'},{l:'内心渴望',v:'征服无法征服之物'},{l:'致命弱点',v:'偏执到自我毁灭'}],
+    preview:'你的灵魂里燃烧着一种别人无法理解的火焰。一旦认定了一个目标，你会以令人震撼的专注与意志力全力追求，不受任何外部力量左右……',
+    full:'<p>你的灵魂里燃烧着一种别人无法理解的火焰。一旦认定了一个目标，你会以令人震撼的专注与意志力全力追求，不受任何外部力量左右。</p><p>你对极限这个词天生抵触——你要的不是安全，是彻底的、没有妥协的胜利。这种烈度让你成为天生的领袖与斗士，也让你的人生充满代价高昂的偏执。</p><p>你最需要的人，是那个能在你快要燃尽之前轻声告诉你够了的人。</p>',
+    dims:[{l:'感性',r:'理性',p:50},{l:'内向',r:'外向',p:55},{l:'保守',r:'激进',p:90},{l:'顺从',r:'反叛',p:92},{l:'自省',r:'行动',p:88}],
+    advice:[{h:'关于目标',b:'问一问自己：我在追逐的，究竟是真实的目标，还是一头象征着我未解的伤的白鲸？有时候，放下比追求更需要勇气。'},{h:'关于他人',b:'你的意志力足以征服海洋，但别忘了，你的船上还有其他人。'}],
+    peers:['唐·璜','麦克白','克里斯托弗·哥伦布'],
+    books:[{t:'白鲸',a:'赫尔曼·梅尔维尔',r:'你的史诗，你的执念之书'},{t:'老人与海',a:'海明威',r:'同样与命运角力的灵魂'},{t:'麦克白',a:'莎士比亚',r:'当执念遇上野心，命运如何书写'}],
+    compat:{raskolnikov:60,julien:55,janeyre:60,hamlet:35,gatsby:45,daiyu:20,quixote:30,anna:38}
+  },
+
+  anna:{
+    name:'安娜·卡列尼娜',badge:'情欲殉道型',
+    origin:'《安娜·卡列尼娜》· 托尔斯泰',
+    tagline:'“一切都结束了，我除了他别无所有，我要他记住这一点。”',
+    traits:[{l:'核心气质',v:'热烈·致命'},{l:'思维方式',v:'感性·全情投入'},{l:'内心渴望',v:'真实的爱与自由'},{l:'致命弱点',v:'无法半途而废'}],
+    preview:'你爱起来不留退路，恨起来也彻底决绝。你对虚伪的体面有一种本能的厌恶，宁愿把一切押注在真实的感受上……',
+    full:'<p>你爱起来不留退路，恨起来也彻底决绝。你对虚伪的体面有一种本能的厌恶，宁愿把一切押注在真实的感受上，哪怕那是悬崖。</p><p>你的存在本身就是一种张力——你太耀眼，让人无法忽视，却也因此承受着最重的目光。你从不会为了安全感而委屈自己，但代价是，你的情感烈度让周围的人很难接住你。</p><p>你需要的不是更多的爱，而是一个足以接住你全部重量的人。在找到那个人之前，请先学会接住自己。</p>',
+    dims:[{l:'感性',r:'理性',p:8},{l:'内向',r:'外向',p:65},{l:'保守',r:'激进',p:70},{l:'顺从',r:'反叛',p:75},{l:'自省',r:'行动',p:55}],
+    advice:[{h:'关于爱',b:'你的爱是天才级的，但爱一个人不应该等于消失成那个人。保留自己的根，才能让爱走得更远。'},{h:'关于情绪',b:'当你觉得一切都失控时，先停下来问问：这个感受是真实的信号，还是旧伤在说话？'}],
+    peers:['林黛玉','盖茨比','茅山的渔期'],
+    books:[{t:'安娜·卡列尼娜',a:'列夫·托尔斯泰',r:'你的灵魂之书'},{t:'包法利夫人',a:'福楼拜',r:'同样在枷锁中燃烧的女人'},{t:'飘',a:'玛格丽特·米切尔',r:'烈性与爱情，另一种壮烈选择'}],
+    compat:{daiyu:80,gatsby:55,hamlet:40,janeyre:50,raskolnikov:45,ahab:38,quixote:40,julien:42}
+  },
+  julien:{
+    name:'于连·索雷尔',badge:'野心攀登型',
+    origin:'《红与黑》· 司汤达',
+    tagline:'“我的野心是通往幸福的唯一道路。”',
+    traits:[{l:'核心气质',v:'野心·敏感'},{l:'思维方式',v:'算计·自我怀疑并存'},{l:'内心渴望',v:'突破阶层，被世界承认'},{l:'致命弱点',v:'骄傲摧毁了他自己'}],
+    preview:'你清醒地知道自己想要什么，也清醒地知道自己所处的位置——这两者之间的落差，是你一生的燃料……',
+    full:'<p>你清醒地知道自己想要什么，也清醒地知道自己所处的位置——这两者之间的落差，是你一生的燃料，也是你最深的伤。</p><p>你在人群中永远保持着一份距离，观察、计算、推演。你并非冷漠，恰恰相反——你太渴望被认可，以至于不得不把渴望藏得很深。</p><p>你身上最动人的，是那种即便知道前路艰难也绝不退缩的烈性。但请记住：真正值得你攀登的高峰，是你内心的那座，而不是别人眼中的那一座。</p>',
+    dims:[{l:'感性',r:'理性',p:40},{l:'内向',r:'外向',p:35},{l:'保守',r:'激进',p:78},{l:'顺从',r:'反叛',p:82},{l:'自省',r:'行动',p:60}],
+    advice:[{h:'关于野心',b:'野心是燃料，但别让它成为你唯一的身份。问问自己：如果没有任何人看见，我还愿意做这件事吗？'},{h:'关于自尊',b:'你的骄傲保护了你，但也隔绝了你。试着让一两个人真正走近你——不是为了利用，而是为了被接住。'}],
+    peers:['拉斯柯尔尼科夫','盖茨比','小欧黑德'],
+    books:[{t:'红与黑',a:'司汤达',r:'你的精神原本，请精读'},{t:'高老头',a:'巴尔扎克',r:'阶层与野心的另一面镜子'},{t:'局外人',a:'加缪',r:'当野心耗尽，你还剩什么'}],
+    compat:{raskolnikov:75,hamlet:70,ahab:55,gatsby:60,janeyre:48,daiyu:30,quixote:35,anna:42}
+  },
+  quixote:{
+    name:'堂吉诃德',badge:'浪漫骑士型',
+    origin:'《堂吉诃德》· 塞万提斯',
+    tagline:'\u201c疯狂是什么？疯狂是用幽默对抗世界的荒诞。——而你，是清醒的骑士。\u201d',
+    traits:[{l:'核心气质',v:'理想主义·天真'},{l:'思维方式',v:'诗意·反常规'},{l:'内心渴望',v:'在俗世中守护美与骑士精神'},{l:'致命弱点',v:'与现实脱节'}],
+    preview:'你有一颗不愿被现实驯化的心。你在平凡中看见传奇，在磨坊里看见巨人，在人群里看见骑士的使命……',
+    full:'<p>你有一颗不愿被现实驯化的心。你在平凡中看见传奇，在磨坊里看见巨人，在人群里看见骑士的使命。这不是幼稚，这是一种近乎宗教的对美好的信仰。</p><p>你用幽默和荒诞保护自己，也保护着内心那个纯粹的自我。你比任何人都清楚这个世界的规则，但你选择不遵守——不是因为天真，而是因为清醒。</p><p>你的存在提醒所有人：在一个让人彻底务实的世界里，需要有人守护那些看似没用的美。</p>',
+    dims:[{l:'感性',r:'理性',p:22},{l:'内向',r:'外向',p:60},{l:'保守',r:'激进',p:55},{l:'顺从',r:'反叛',p:58},{l:'自省',r:'行动',p:62}],
+    advice:[{h:'关于理想',b:'你的理想主义是稀缺品，请珍惜它。但也学会在适当时候辨别哪些是磨坊，哪些真的是巨人。'},{h:'关于接地',b:'与那些脚踏实地的人为伴，他们不会消灭你的浪漫，只会帮你的梦想多走几步。'}],
+    peers:['彼得·潘','约翰·基廷','圣-埃克絮佩里'],
+    books:[{t:'堂吉诃德',a:'塞万提斯',r:'你的精神祖先，笑中带泪'},{t:'小王子',a:'圣-埃克絮佩里',r:'另一颗拒绝长大的灵魂'},{t:'百年孤独',a:'加西亚·马尔克斯',r:'荒诞即现实，浪漫即真相'}],
+    compat:{daiyu:45,hamlet:50,anna:40,gatsby:38,janeyre:42,raskolnikov:30,ahab:30,julien:35}
+  }
+};
+
+const NUMS=['一','二','三','四','五','六','七','八','九','十'];
+let cur=0,ans=new Array(QS.length).fill(null);
+
+// ── Progress save ──
+function saveProgress(){try{localStorage.setItem('lq_ans',JSON.stringify(ans));localStorage.setItem('lq_cur',cur);}catch(e){}}
+function loadProgress(){try{const a=localStorage.getItem('lq_ans');const c=localStorage.getItem('lq_cur');if(a&&c){ans=JSON.parse(a);cur=parseInt(c);return true;}}catch(e){}return false;}
+function clearProgress(){try{localStorage.removeItem('lq_ans');localStorage.removeItem('lq_cur');}catch(e){}}
+
+// ── Share / referral ──
+let shareCount=0;
+function getShareCount(){try{return parseInt(localStorage.getItem('lq_share')||'0');}catch(e){return 0;}}
+function incShareCount(){trackShare();try{shareCount=Math.min(3,getShareCount()+1);localStorage.setItem('lq_share',shareCount);updateShareUI();}catch(e){}}
+function updateShareUI(){
+  shareCount=getShareCount();
+  const el=document.getElementById('share-count');
+  const prog=document.getElementById('share-prog');
+  if(el)el.textContent=shareCount;
+  if(prog)prog.style.width=Math.round(shareCount/3*100)+'%';
+  if(shareCount>=3){doFreeUnlock();}
+}
+function doFreeUnlock(){
+  document.getElementById('paywall').style.display='none';
+  var fr=document.getElementById('full-report');
+  fr.style.display='block';
+  const ov=document.querySelector('.res-blur-overlay');
+  if(ov)ov.style.display='none';
+  showToast('分享成功！完整报告已为你解锁 🎁',2500);
+  setTimeout(function(){
+    document.querySelectorAll('.dim-fill').forEach(function(el){el.style.width=el.dataset.pct+'%';});
+  },200);
+}
+function handleShare(){
+  const url=window.location.href;
+  const text='测测你是哪位文学灵魂？林黛玉、哈姆雷特、简·爱……10道题揭开你的灵魂底色！';
+  if(navigator.share){
+    navigator.share({title:'你藏着哪位文学灵魂？',text:text,url:url}).then(function(){incShareCount();}).catch(function(){});
+  } else {
+    navigator.clipboard.writeText(url+'\n'+text).then(function(){
+      incShareCount();
+      const btn=document.getElementById('btn-share');
+      const orig=btn.textContent;
+      btn.textContent='已复制！分享给好友吧 ✓';
+      setTimeout(function(){btn.textContent=orig;},2000);
+    }).catch(function(){
+      incShareCount();
+      alert('链接已复制：'+url);
+    });
+  }
+}
+
+// ── Countdown ──
+let cdEnd=null;
+function startCountdown(){
+  try{
+    const saved=localStorage.getItem('lq_cd_end');
+    if(saved){cdEnd=parseInt(saved);}
+    else{cdEnd=Date.now()+30*60*1000;localStorage.setItem('lq_cd_end',cdEnd);}
+  }catch(e){cdEnd=Date.now()+30*60*1000;}
+  tickCountdown();
+}
+function tickCountdown(){
+  const bar=document.getElementById('countdown-bar');
+  const el=document.getElementById('cd-time');
+  if(!el||!bar)return;
+  const left=cdEnd-Date.now();
+  if(left<=0){bar.style.display='none';return;}
+  const m=Math.floor(left/60000);
+  const s=Math.floor((left%60000)/1000);
+  el.textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  setTimeout(tickCountdown,1000);
+}
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function startQuiz(){
+  show('quiz');
+  if(loadProgress()&&cur>0){
+    if(!confirm('检测到上次未完成的进度（第'+(cur+1)+'题），是否继续？')){
+      cur=0;ans=new Array(QS.length).fill(null);clearProgress();
+    }
+  }
+  renderQ();
+}
+
+function renderQ(){
+  const body=document.querySelector('.quiz-body');
+  if(body){body.classList.add('slide-out');}
+  setTimeout(function(){
+    const q=QS[cur];
+    const pct=Math.round(cur/QS.length*100);
+    document.getElementById('q-counter').textContent='第 '+(cur+1)+' 题 / 共 '+QS.length+' 题';
+    document.getElementById('q-pct').textContent=pct+'%';
+    document.getElementById('prog').style.width=pct+'%';
+    document.getElementById('q-num').textContent='第'+NUMS[cur]+'题';
+    document.getElementById('q-text').textContent=q.t;
+    const labels=['A','B','C','D'];
+    document.getElementById('options').innerHTML=q.o.map(function(o,i){
+      return '<button class="opt'+(ans[cur]===i?' selected':'')+'" data-i="'+i+'">'
+        +'<span class="opt-badge">'+labels[i]+'</span>'
+        +'<span>'+o.t+'</span>'
+        +'</button>';
+    }).join('');
+    document.querySelectorAll('.opt').forEach(function(btn){
+      btn.addEventListener('click',function(){selectOpt(parseInt(this.dataset.i));});
+    });
+    document.getElementById('btn-back').disabled=cur===0;
+    const nxt=document.getElementById('btn-next');
+    nxt.disabled=ans[cur]===null;
+    nxt.textContent=cur===QS.length-1?'查看结果 ✦':'下一题 →';
+    nxt.className='nav-btn btn-next'+(cur===QS.length-1?' last':'');
+    if(body){
+      body.classList.remove('slide-out');
+      body.classList.add('slide-in');
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){
+          body.classList.remove('slide-in');
+        });
+      });
+    }
+  },180);
+}
+
+function selectOpt(i){ans[cur]=i;saveProgress();showSaveBanner();renderQ();}
+function prevQ(){if(cur>0){cur--;saveProgress();renderQ();}}
+
+function nextQ(){
+  if(ans[cur]===null)return;
+  if(cur<QS.length-1){cur++;saveProgress();renderQ();}
+  else showLoading();
+}
+
+const loadingMsgs=['正在匹配你的文学灵魂…','翻阅千年文学长卷…','对照灵魂档案中…','答案即将揭晓…'];
+let lIdx=0,lTimer=null;
+function showLoading(){
+  show('loading');
+  lIdx=0;
+  document.getElementById('loading-text').textContent=loadingMsgs[0];
+  lTimer=setInterval(function(){
+    lIdx=(lIdx+1)%loadingMsgs.length;
+    document.getElementById('loading-text').textContent=loadingMsgs[lIdx];
+  },700);
+  setTimeout(function(){clearInterval(lTimer);buildResult();},2800);
+}
+
+function buildResult(){
+  const tot={};
+  ans.forEach(function(a,qi){
+    if(a===null)return;
+    const sc=QS[qi].o[a].s;
+    for(const k in sc)tot[k]=(tot[k]||0)+sc[k];
+  });
+  const winner=Object.entries(tot).sort(function(a,b){return b[1]-a[1];})[0][0];
+  const ch=CHARS[winner];
+  window._currentCh=ch;
+  document.getElementById('r-badge').textContent=ch.badge;
+  var badgeEl=document.getElementById('r-badge');
+  badgeEl.className='res-badge badge-'+ch.badge;
+  var emojiEl=document.getElementById('r-emoji');
+  if(emojiEl)emojiEl.textContent=CHAR_EMOJI[winner]||'📚';
+  var scoreEl=document.getElementById('r-score-badge');
+  if(scoreEl){var sc=calcMatchScore(tot,winner);scoreEl.textContent='灵魂匹配度 '+sc+'%';}
+  var nameEl=document.getElementById('r-name');
+  nameEl.textContent='';
+  document.getElementById('r-origin').textContent=ch.origin;
+  trackTest(winner);
+  document.getElementById('r-tagline').textContent=ch.tagline;
+  document.getElementById('r-traits').innerHTML=ch.traits.map(function(t){
+    return '<div class="trait-card"><div class="trait-lbl">'+t.l+'</div><div class="trait-val">'+t.v+'</div></div>';
+  }).join('');
+  document.getElementById('r-preview-text').textContent=ch.preview;
+  document.getElementById('r-full-desc').innerHTML=ch.full;
+  document.getElementById('r-dims').innerHTML=ch.dims.map(function(d){
+    return '<div class="dim-item"><div class="dim-row"><span>'+d.l+'</span><span>'+d.r+'</span></div>'
+      +'<div class="dim-track"><div class="dim-fill" style="width:0%" data-pct="'+d.p+'"></div></div></div>';
+  }).join('');
+  document.getElementById('r-advice').innerHTML=ch.advice.map(function(a){
+    return '<div class="advice-card"><div class="advice-head"><span class="advice-dot"></span>'+a.h+'</div>'
+      +'<div class="advice-body">'+a.b+'</div></div>';
+  }).join('');
+  document.getElementById('r-peers').innerHTML=ch.peers.map(function(p){
+    return '<span class="peer-tag">'+p+'</span>';
+  }).join('');
+  show('result');
+  startCountdown();
+  updateShareUI();
+  setTimeout(function(){typewriterEffect(document.getElementById('r-name'),ch.name,80);},200);
+  renderCompat(ch,winner);
+  renderBooks(ch);
+  playSuccess();
+  setTimeout(function(){
+    document.querySelectorAll('.dim-fill').forEach(function(el){
+      el.style.width=el.dataset.pct+'%';
+    });
+  },300);
+}
+
+function openModal(){document.getElementById('modal').classList.add('open');}
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+
+function verifyCode(){
+  const v=document.getElementById('code-input').value.trim();
+  const err=document.getElementById('modal-err');
+  if(v.length!==6){err.textContent='请输入6位解锁码';return;}
+  if(adminCodes.indexOf(v.toUpperCase())!==-1){
+    closeModal();
+    trackUnlock();
+    document.getElementById('paywall').style.display='none';
+    var fr=document.getElementById('full-report');
+    fr.style.display='block';
+    fr.classList.add('unlocking');
+    var ov=document.querySelector('.res-blur-overlay');
+    if(ov)ov.style.display='none';
+    doUnlockAnimation();
+    setTimeout(function(){
+      document.querySelectorAll('.dim-fill').forEach(function(el){el.style.width=el.dataset.pct+'%';});
+      document.querySelectorAll('.compat-fill').forEach(function(el){el.style.width=el.dataset.pct+'%';el.style.background=el.dataset.color||'#b8933f';});
+    },300);
+  } else {
+    err.textContent='解锁码无效，请检查后重试';
+  }
+}
+
+function restart(){
+  cur=0;ans=new Array(QS.length).fill(null);clearProgress();
+  document.getElementById('paywall').style.display='';
+  document.getElementById('full-report').style.display='none';
+  document.getElementById('code-input').value='';
+  document.getElementById('modal-err').textContent='';
+  show('cover');
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  document.getElementById('btn-start').addEventListener('click',startQuiz);
+  document.getElementById('btn-back').addEventListener('click',prevQ);
+  document.getElementById('btn-next').addEventListener('click',nextQ);
+  document.getElementById('btn-unlock').addEventListener('click',openPayScreen);
+  document.getElementById('btn-confirm').addEventListener('click',verifyCode);
+  document.getElementById('btn-cancel').addEventListener('click',closeModal);
+  document.getElementById('btn-retry').addEventListener('click',restart);
+  document.getElementById('btn-share').addEventListener('click',handleShare);
+  document.getElementById('btn-pay-back').addEventListener('click',closePayScreen);
+  document.getElementById('btn-pay-confirm').addEventListener('click',confirmPayCode);
+  document.getElementById('pay-code-input').addEventListener('keydown',function(e){if(e.key==='Enter')confirmPayCode();});
+  document.querySelectorAll('.pay-method-tab').forEach(function(t){
+    t.addEventListener('click',function(){switchPayMethod(this.dataset.method);});
+  });
+  document.getElementById('btn-show-card').addEventListener('click',function(){if(window._currentCh)openShareCard(window._currentCh);});
+  document.getElementById('btn-card-close').addEventListener('click',function(){document.getElementById('card-screen').classList.remove('open');});
+  document.getElementById('btn-card-close2').addEventListener('click',function(){document.getElementById('card-screen').classList.remove('open');});
+  document.getElementById('btn-card-share').addEventListener('click',function(){
+    var url=window.location.href;
+    navigator.clipboard.writeText(url).then(function(){alert('链接已复制！请截图此卡片后发到小红书，并在文案中附上链接 ✦');}).catch(function(){alert('请截图此卡片发到小红书 #你是哪位文学灵魂');});
+  });
+  document.getElementById('btn-audio').addEventListener('click',function(){toggleAudio();initAudio();});
+  document.getElementById('btn-admin-entry').addEventListener('click',openAdmin);
+  document.getElementById('btn-admin-close').addEventListener('click',closeAdmin);
+  document.getElementById('btn-gen-codes').addEventListener('click',generateCodes);
+  document.getElementById('btn-copy-codes').addEventListener('click',copyAllCodes);
+  initAudio();
+  initParticles();
+  initSwipe();
+  // animate social proof counter
+  var counterEl=document.querySelector('.paywall-social strong');
+  if(counterEl)animateCounter(counterEl,2847,1800);
+  selectOpt_orig=selectOpt;
+  selectOpt=function(i){playPageTurn();selectOpt_orig(i);};
+});
+
+// ── Compat chart ──────────────────────────────────────
+function renderCompat(ch,winner){
+  const el=document.getElementById('r-compat');
+  if(!el||!ch.compat)return;
+  const entries=Object.entries(ch.compat).sort(function(a,b){return b[1]-a[1];});
+  const colors=['#d4ad5a','#c8a348','#b8933f','#a07832','#886028','#6e4c1e','#543815','#3a260e'];
+  el.innerHTML=entries.map(function(e,i){
+    var displayName=CHARS[e[0]]?CHARS[e[0]].name:e[0];
+    return '<div class="compat-item">'
+      +'<span class="compat-name">'+displayName+'</span>'
+      +'<div class="compat-track"><div class="compat-fill" style="width:0%" data-pct="'+e[1]+'" data-color="'+colors[i]+'"></div></div>'
+      +'<span class="compat-pct">'+e[1]+'%</span>'
+      +'</div>';
+  }).join('');
+  setTimeout(function(){
+    document.querySelectorAll('.compat-fill').forEach(function(el){
+      el.style.width=el.dataset.pct+'%';
+      el.style.background=el.dataset.color;
+    });
+  },400);
+}
+
+// ── Books ──────────────────────────────────────────────
+function renderBooks(ch){
+  const el=document.getElementById('r-books');
+  if(!el||!ch.books)return;
+  el.innerHTML=ch.books.map(function(b,i){
+    var title=b[0]||b.t||'';
+    var author=b[1]||b.a||'';
+    var reason=b[2]||b.r||'';
+    return '<div class="book-item">'
+      +'<div class="book-num">'+(i+1)+'</div>'
+      +'<div class="book-info">'
+      +'<div class="book-title">'+title+(author?' · '+author:'')+'</div>'
+      +'<div class="book-reason">'+reason+'</div>'
+      +'</div></div>';
+  }).join('');
+}
+
+// ── Typewriter for result name ─────────────────────────
+function typewriterEffect(el,text,speed){
+  el.textContent='';
+  var cursor=document.createElement('span');
+  cursor.className='typewriter-cursor';
+  el.parentNode.insertBefore(cursor,el.nextSibling);
+  var i=0;
+  function tick(){
+    if(i<text.length){el.textContent+=text[i++];setTimeout(tick,speed);}
+    else{setTimeout(function(){if(cursor.parentNode)cursor.parentNode.removeChild(cursor);},800);}
+  }
+  tick();
+}
+
+// ── Share card ─────────────────────────────────────────
+var currentChar=null;
+function openShareCard(ch){
+  currentChar=ch;
+  document.getElementById('card-name').textContent=ch.name;
+  document.getElementById('card-type').textContent=ch.badge;
+  document.getElementById('card-quote').textContent=ch.tagline;
+  document.getElementById('card-traits').innerHTML=ch.traits.slice(0,3).map(function(t){
+    return '<div class="card-trait"><div class="card-trait-l">'+t.l+'</div><div class="card-trait-v">'+t.v+'</div></div>';
+  }).join('');
+  document.getElementById('card-screen').classList.add('open');
+}
+
+// ── Audio ──────────────────────────────────────────────
+var audioCtx=null,audioMuted=false;
+function initAudio(){
+  try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}
+}
+function playPageTurn(){
+  if(audioMuted||!audioCtx)return;
+  try{
+    var buf=audioCtx.createBuffer(1,audioCtx.sampleRate*0.12,audioCtx.sampleRate);
+    var d=buf.getChannelData(0);
+    for(var i=0;i<d.length;i++){
+      d[i]=(Math.random()*2-1)*Math.exp(-i/(audioCtx.sampleRate*0.04))*0.15;
+    }
+    var src=audioCtx.createBufferSource();
+    var filt=audioCtx.createBiquadFilter();
+    filt.type='bandpass';filt.frequency.value=2200;filt.Q.value=0.8;
+    src.buffer=buf;src.connect(filt);filt.connect(audioCtx.destination);
+    src.start();
+  }catch(e){}
+}
+function playSuccess(){
+  if(audioMuted||!audioCtx)return;
+  try{
+    [523,659,784].forEach(function(freq,i){
+      var osc=audioCtx.createOscillator();
+      var gain=audioCtx.createGain();
+      osc.frequency.value=freq;osc.type='sine';
+      gain.gain.setValueAtTime(0,audioCtx.currentTime+i*0.12);
+      gain.gain.linearRampToValueAtTime(0.06,audioCtx.currentTime+i*0.12+0.05);
+      gain.gain.linearRampToValueAtTime(0,audioCtx.currentTime+i*0.12+0.25);
+      osc.connect(gain);gain.connect(audioCtx.destination);
+      osc.start(audioCtx.currentTime+i*0.12);
+      osc.stop(audioCtx.currentTime+i*0.12+0.3);
+    });
+  }catch(e){}
+}
+function toggleAudio(){
+  audioMuted=!audioMuted;
+  var btn=document.getElementById('btn-audio');
+  btn.textContent=audioMuted?'♪':'♪';
+  btn.classList.toggle('muted',audioMuted);
+}
+
+// ── Admin panel ────────────────────────────────────────
+var ADMIN_PASS='admin888';
+var adminCodes=[];
+try{adminCodes=JSON.parse(localStorage.getItem('lq_admin_codes')||'["LIT001"]');}catch(e){adminCodes=['LIT001'];}
+
+function saveAdminCodes(){try{localStorage.setItem('lq_admin_codes',JSON.stringify(adminCodes));}catch(e){}}
+
+function openAdmin(){
+  var pass=prompt('请输入管理密码');
+  if(pass!==ADMIN_PASS){if(pass!==null)alert('密码错误');return;}
+  refreshAdminStats();
+  document.getElementById('admin-panel').classList.add('open');
+}
+function closeAdmin(){document.getElementById('admin-panel').classList.remove('open');}
+
+function refreshAdminStats(){
+  try{
+    var total=parseInt(localStorage.getItem('lq_total_tests')||'0');
+    var unlocked=parseInt(localStorage.getItem('lq_total_unlocked')||'0');
+    var shares=parseInt(localStorage.getItem('lq_total_shares')||'0');
+    document.getElementById('adm-total').textContent=total;
+    document.getElementById('adm-unlocked').textContent=unlocked;
+    document.getElementById('adm-codes').textContent=adminCodes.length;
+    document.getElementById('adm-shares').textContent=shares;
+    
+    var dist=JSON.parse(localStorage.getItem('lq_char_dist')||'{}');
+    var keys=Object.keys(CHARS);
+    var max=Math.max.apply(null,keys.map(function(k){return dist[k]||0;}).concat([1]));
+    document.getElementById('adm-dist').innerHTML=keys.map(function(k){
+      var n=dist[k]||0;
+      var pct=Math.round(n/max*100);
+      return '<div class="admin-bar-item">'
+        +'<span class="admin-bar-label">'+CHARS[k].name+'</span>'
+        +'<div class="admin-bar-track"><div class="admin-bar-fill" style="width:'+pct+'%"></div></div>'
+        +'<span class="admin-bar-count">'+n+'</span>'
+        +'</div>';
+    }).join('');
+    
+    document.getElementById('adm-codes-list').textContent=adminCodes.join('\n')||'暂无解锁码';
+  }catch(e){}
+}
+
+function generateCodes(){
+  var n=parseInt(document.getElementById('adm-code-n').value)||5;
+  n=Math.min(50,Math.max(1,n));
+  var chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  for(var i=0;i<n;i++){
+    var code='';
+    for(var j=0;j<6;j++)code+=chars[Math.floor(Math.random()*chars.length)];
+    if(adminCodes.indexOf(code)===-1)adminCodes.push(code);
+  }
+  saveAdminCodes();
+  refreshAdminStats();
+}
+
+function copyAllCodes(){
+  var text=adminCodes.join('\n');
+  navigator.clipboard.writeText(text).then(function(){
+    var btn=document.getElementById('btn-copy-codes');
+    var orig=btn.textContent;btn.textContent='已复制 ✓';
+    setTimeout(function(){btn.textContent=orig;},1500);
+  }).catch(function(){alert(text);});
+}
+
+// ── Tracking helpers ───────────────────────────────────
+function trackTest(winner){
+  try{
+    var t=parseInt(localStorage.getItem('lq_total_tests')||'0')+1;
+    localStorage.setItem('lq_total_tests',t);
+    var dist=JSON.parse(localStorage.getItem('lq_char_dist')||'{}');
+    dist[winner]=(dist[winner]||0)+1;
+    localStorage.setItem('lq_char_dist',JSON.stringify(dist));
+  }catch(e){}
+}
+function trackUnlock(){
+  try{var u=parseInt(localStorage.getItem('lq_total_unlocked')||'0')+1;localStorage.setItem('lq_total_unlocked',u);}catch(e){}
+}
+function trackShare(){
+  try{var s=parseInt(localStorage.getItem('lq_total_shares')||'0')+1;localStorage.setItem('lq_total_shares',s);}catch(e){}
+}
+
+
+// ── Character emoji map ──────────────────────────────
+var CHAR_EMOJI={
+  hamlet:'🎭',daiyu:'🌸',janeyre:'📖',gatsby:'🥂',
+  raskolnikov:'🔪',ahab:'⚓',quixote:'🛡️',anna:'🌹',julien:'♟️'
+};
+
+// ── Toast ─────────────────────────────────────────────
+var toastTimer=null;
+function showToast(msg,duration){
+  duration=duration||2000;
+  var t=document.getElementById('toast');
+  if(!t)return;
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){t.classList.remove('show');},duration);
+}
+
+// ── Cover canvas particles ────────────────────────────
+function initParticles(){
+  var canvas=document.getElementById('cover-canvas');
+  if(!canvas)return;
+  var ctx=canvas.getContext('2d');
+  var W,H,particles=[];
+  function resize(){
+    W=canvas.width=canvas.offsetWidth;
+    H=canvas.height=canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize',resize);
+  var GOLD='rgba(184,147,63,';
+  for(var i=0;i<18;i++){
+    particles.push({
+      x:Math.random()*100,y:Math.random()*100+20,
+      size:Math.random()*2.5+0.8,
+      speed:0.2+Math.random()*0.4,
+      delay:Math.random()*4000,
+      born:Date.now()-Math.random()*4000,
+      opacity:0
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    var now=Date.now();
+    particles.forEach(function(p){
+      var age=(now-p.born)%5000;
+      var progress=age/5000;
+      var op=progress<0.1?progress*6:progress>0.85?(1-progress)*6.7:0.6;
+      op=Math.max(0,Math.min(1,op))*0.55;
+      ctx.beginPath();
+      ctx.arc(p.x/100*W,(p.y-progress*15)/100*H,p.size,0,Math.PI*2);
+      ctx.fillStyle=GOLD+op+')';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// ── Animated counter for social proof ────────────────
+function animateCounter(el,target,duration){
+  var start=0,startTime=null;
+  function step(ts){
+    if(!startTime)startTime=ts;
+    var progress=Math.min((ts-startTime)/duration,1);
+    var ease=1-Math.pow(1-progress,3);
+    el.textContent=Math.floor(ease*target).toLocaleString();
+    if(progress<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// ── Score badge calculation ──────────────────────────
+function calcMatchScore(tot,winner){
+  var winScore=tot[winner]||1;
+  var allScores=Object.values(tot);
+  var max=Math.max.apply(null,allScores);
+  var pct=Math.min(99,Math.max(60,Math.round(winScore/max*85+Math.random()*8+7)));
+  return pct;
+}
+
+// ── Touch swipe on quiz ──────────────────────────────
+var touchStartX=0;
+function initSwipe(){
+  var quiz=document.getElementById('screen-quiz');
+  if(!quiz)return;
+  quiz.addEventListener('touchstart',function(e){
+    touchStartX=e.touches[0].clientX;
+  },{passive:true});
+  quiz.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-touchStartX;
+    if(Math.abs(dx)>60){
+      if(dx<0&&ans[cur]!==null)nextQ();
+      else if(dx>0)prevQ();
+    }
+  },{passive:true});
+}
+
+// ── Auto-save feedback ───────────────────────────────
+function showSaveBanner(){
+  var b=document.getElementById('save-banner');
+  if(!b)return;
+  b.classList.add('show');
+  setTimeout(function(){b.classList.remove('show');},1500);
+}
+
+// ── Unlock with animation ────────────────────────────
+function doUnlockAnimation(){
+  var fr=document.getElementById('full-report');
+  if(!fr)return;
+  fr.classList.add('unlocking');
+  showToast('解锁成功！完整灵魂报告已开启 ✦',2500);
+  playSuccess();
+}
+
+
+// ── QR canvas (placeholder pattern) ──────────────────
+// In production, replace with a real <img src="your-qr.jpg">
+// This draws a visual placeholder that looks like a QR code
+function drawQRPlaceholder(canvasId, color){
+  var canvas=document.getElementById(canvasId);
+  if(!canvas)return;
+  var ctx=canvas.getContext('2d');
+  var S=180;canvas.width=S;canvas.height=S;
+  ctx.fillStyle='#ffffff';ctx.fillRect(0,0,S,S);
+  var c=color||'#1a1208';
+  // outer border
+  ctx.fillStyle=c;
+  ctx.fillRect(10,10,50,50);ctx.fillRect(120,10,50,50);ctx.fillRect(10,120,50,50);
+  ctx.fillStyle='#fff';
+  ctx.fillRect(18,18,34,34);ctx.fillRect(128,18,34,34);ctx.fillRect(18,128,34,34);
+  ctx.fillStyle=c;
+  ctx.fillRect(24,24,22,22);ctx.fillRect(134,24,22,22);ctx.fillRect(24,134,22,22);
+  // random data modules
+  var seed=42;
+  function rand(){seed=(seed*1664525+1013904223)&0xffffffff;return(seed>>>0)/0xffffffff;}
+  for(var r=0;r<18;r++){
+    for(var cc=0;cc<18;cc++){
+      var x=70+cc*6,y=10+r*6;
+      if(rand()>0.5){ctx.fillStyle=c;ctx.fillRect(x,y,5,5);}
+    }
+  }
+  for(var r2=9;r2<18;r2++){
+    for(var cc2=0;cc2<9;cc2++){
+      var x2=10+cc2*6,y2=70+r2*6;
+      if(rand()>0.5){ctx.fillStyle=c;ctx.fillRect(x2,y2,5,5);}
+    }
+  }
+  // center logo hint
+  ctx.fillStyle='rgba(184,147,63,0.9)';
+  ctx.font='bold 13px serif';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('放',90,90);
+}
+
+// ── Payment screen ────────────────────────────────────
+var currentMethod='wechat';
+
+function openPayScreen(){
+  document.getElementById('pay-screen').classList.add('open');
+  window.scrollTo(0,0);
+  drawQRPlaceholder('qr-canvas','#1a1208');
+}
+function closePayScreen(){
+  document.getElementById('pay-screen').classList.remove('open');
+}
+
+function switchPayMethod(method){
+  currentMethod=method;
+  document.querySelectorAll('.pay-method-tab').forEach(function(t){
+    t.classList.toggle('active',t.dataset.method===method);
+  });
+  document.getElementById('qr-method-name').textContent=method==='wechat'?'微信':'支付宝';
+  drawQRPlaceholder('qr-canvas',method==='wechat'?'#07c160':'#1677ff');
+}
+
+function confirmPayCode(){
+  var v=document.getElementById('pay-code-input').value.trim().toUpperCase();
+  var err=document.getElementById('pay-code-err');
+  if(v.length!==6){err.textContent='请输入6位解锁码';return;}
+  if(adminCodes.indexOf(v)!==-1){
+    closePayScreen();
+    closeModal();
+    trackUnlock();
+    document.getElementById('paywall').style.display='none';
+    var fr=document.getElementById('full-report');
+    fr.style.display='block';
+    var ov=document.querySelector('.res-blur-overlay');
+    if(ov)ov.style.display='none';
+    doUnlockAnimation();
+    setTimeout(function(){
+      document.querySelectorAll('.dim-fill').forEach(function(el){el.style.width=el.dataset.pct+'%';});
+      document.querySelectorAll('.compat-fill').forEach(function(el){el.style.width=el.dataset.pct+'%';el.style.background=el.dataset.color||'#b8933f';});
+    },300);
+  } else {
+    err.textContent='解锁码无效，请检查后重试';
+    document.getElementById('pay-code-input').style.borderColor='rgba(224,112,112,0.5)';
+    setTimeout(function(){document.getElementById('pay-code-input').style.borderColor='';},2000);
+  }
+}
+
+</script>
+
+<!-- ══ ADMIN PANEL ══ -->
+<div class="admin-panel" id="admin-panel">
+  <div class="admin-header">
+    <span class="admin-title">管理后台</span>
+    <button class="admin-close" id="btn-admin-close">✕</button>
+  </div>
+  <div class="admin-stats">
+    <div class="stat-card"><div class="stat-lbl">总测试次数</div><div class="stat-val" id="adm-total">0</div></div>
+    <div class="stat-card"><div class="stat-lbl">已解锁次数</div><div class="stat-val" id="adm-unlocked">0</div></div>
+    <div class="stat-card"><div class="stat-lbl">有效解锁码</div><div class="stat-val" id="adm-codes">0</div></div>
+    <div class="stat-card"><div class="stat-lbl">分享次数</div><div class="stat-val" id="adm-shares">0</div></div>
+  </div>
+  <div class="admin-section-title" style="margin-bottom:10px">人物结果分布</div>
+  <div id="adm-dist"></div>
+  <div class="code-gen-section">
+    <div class="admin-section-title">解锁码管理</div>
+    <div class="code-gen-row">
+      <input class="code-gen-input" id="adm-code-n" type="number" value="5" min="1" max="50" placeholder="生成数量">
+      <button class="code-gen-btn" id="btn-gen-codes">批量生成</button>
+      <button class="code-gen-btn" id="btn-copy-codes">复制全部</button>
+    </div>
+    <div class="codes-list" id="adm-codes-list">点击"批量生成"创建解锁码</div>
+  </div>
+</div>
+
+</body>
+</html>
