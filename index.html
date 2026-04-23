@@ -38,6 +38,8 @@ html,body{height:100%;background:#0e0b06;font-family:'Noto Sans SC',sans-serif}
 /* ─── SCREENS ─── */
 .screen{display:none;flex-direction:column;min-height:100vh}
 .screen.active{display:flex}
+/* quiz screen 精确填满视口 */
+#screen-quiz{min-height:100vh;height:100vh;min-height:100dvh;height:100dvh;overflow:hidden}
 
 /* ═══════════ COVER ═══════════ */
 #screen-cover{
@@ -53,15 +55,7 @@ html,body{height:100%;background:#0e0b06;font-family:'Noto Sans SC',sans-serif}
     radial-gradient(ellipse 80% 50% at 50% 30%, rgba(184,147,63,0.18) 0%, transparent 60%),
     radial-gradient(ellipse 60% 40% at 20% 80%, rgba(139,32,32,0.12) 0%, transparent 50%);
 }
-.cover-lines{
-  position:absolute;inset:0;overflow:hidden;
-}
-.cover-lines::before{
-  content:'';position:absolute;
-  top:0;left:50%;transform:translateX(-50%);
-  width:1px;height:100%;
-  background:linear-gradient(180deg,transparent 0%,rgba(184,147,63,0.3) 20%,rgba(184,147,63,0.3) 80%,transparent 100%);
-}
+.cover-lines{display:none}
 .cover-content{
   position:relative;z-index:1;
   width:100%;padding:60px 32px 40px;
@@ -130,10 +124,10 @@ html,body{height:100%;background:#0e0b06;font-family:'Noto Sans SC',sans-serif}
   padding:0;
 }
 .quiz-header{
-  padding:20px 24px 16px;
+  padding:14px 20px 12px;
   background:var(--paper);
   border-bottom:0.5px solid var(--border);
-  position:sticky;top:0;z-index:10;
+  position:sticky;top:0;z-index:10;flex-shrink:0;
 }
 .quiz-header-top{
   display:flex;justify-content:space-between;align-items:center;
@@ -144,21 +138,21 @@ html,body{height:100%;background:#0e0b06;font-family:'Noto Sans SC',sans-serif}
 .prog-track{height:2px;background:var(--border);border-radius:1px;overflow:hidden}
 .prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),#d4ad5a);border-radius:1px;transition:width 0.5s cubic-bezier(.4,0,.2,1)}
 
-.quiz-body{padding:32px 24px;flex:1}
+.quiz-body{padding:20px 24px 8px;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;justify-content:flex-start}
 .q-num{
   font-size:10px;letter-spacing:0.3em;color:var(--gold);
-  text-transform:uppercase;margin-bottom:14px;font-weight:500;
+  text-transform:uppercase;margin-bottom:10px;font-weight:500;
 }
 .q-text{
   font-family:'Noto Serif SC',serif;
-  font-size:19px;font-weight:600;
-  color:var(--ink);line-height:1.65;
-  margin-bottom:28px;
+  font-size:18px;font-weight:600;
+  color:var(--ink);line-height:1.55;
+  margin-bottom:18px;
 }
-.options{display:flex;flex-direction:column;gap:10px}
+.options{display:flex;flex-direction:column;gap:8px}
 .opt{
   border:0.5px solid var(--border);
-  border-radius:6px;padding:14px 16px;
+  border-radius:6px;padding:12px 14px;
   background:#fff;cursor:pointer;
   display:flex;align-items:flex-start;gap:12px;
   transition:all 0.15s;
@@ -177,8 +171,9 @@ html,body{height:100%;background:#0e0b06;font-family:'Noto Sans SC',sans-serif}
 .opt.selected .opt-badge{background:var(--gold);border-color:var(--gold);color:#fff}
 
 .quiz-footer{
-  padding:16px 24px 32px;
+  padding:12px 20px 20px;
   display:flex;justify-content:space-between;gap:12px;
+  flex-shrink:0;
 }
 .nav-btn{
   flex:1;padding:13px;border-radius:4px;
@@ -596,19 +591,7 @@ html,body{height:100%;background:#0e0b06;font-family:'Noto Sans SC',sans-serif}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 .typewriter-cursor{display:inline-block;width:2px;height:1em;background:#b8933f;vertical-align:middle;animation:blink 0.9s ease infinite;margin-left:1px}
 
-/* ── Audio toggle ── */
-.audio-toggle{
-  position:fixed;bottom:20px;right:20px;z-index:50;
-  width:38px;height:38px;border-radius:50%;
-  background:rgba(14,11,6,0.85);
-  border:0.5px solid rgba(184,147,63,0.3);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;font-size:15px;
-  transition:all 0.2s;
-  box-shadow:0 2px 12px rgba(0,0,0,0.4);
-}
-.audio-toggle:hover{border-color:rgba(184,147,63,0.6);background:rgba(30,22,10,0.9)}
-.audio-toggle.muted{opacity:0.5}
+/* audio removed */
 
 /* ── Admin panel ── */
 .admin-panel{
@@ -765,7 +748,10 @@ html,body{height:100%;background:#0e0b06;font-family:'Noto Sans SC',sans-serif}
 @media(max-width:380px){
   .cover-title{font-size:2rem}
   .res-name{font-size:2.4rem}
-  .q-text{font-size:16px}
+  .q-text{font-size:15px;margin-bottom:14px}
+  .opt{padding:10px 12px}
+  .quiz-body{padding:14px 18px 6px}
+  .quiz-footer{padding:10px 16px 16px}
 }
 @media(min-width:420px){
   .cover-title{font-size:3rem}
@@ -774,8 +760,8 @@ html,body{height:100%;background:#0e0b06;font-family:'Noto Sans SC',sans-serif}
 /* ── Swipe hint on quiz ── */
 .swipe-hint{
   font-size:11px;color:rgba(107,94,74,0.5);
-  text-align:center;padding:4px 0 12px;
-  letter-spacing:0.05em;
+  text-align:center;padding:2px 0 6px;
+  letter-spacing:0.05em;flex-shrink:0;
 }
 
 /* ── Quiz option micro-anim ── */
@@ -815,9 +801,9 @@ html,body{height:100%;background:#0e0b06;font-family:'Noto Sans SC',sans-serif}
 .save-banner{
   background:rgba(29,158,117,0.1);
   border-top:0.5px solid rgba(29,158,117,0.2);
-  padding:8px 16px;text-align:center;
+  padding:6px 16px;text-align:center;
   font-size:11px;color:rgba(95,207,170,0.6);
-  letter-spacing:0.05em;display:none;
+  letter-spacing:0.05em;display:none;flex-shrink:0;
 }
 .save-banner.show{display:block}
 
@@ -1295,7 +1281,6 @@ html,body{height:100%;background:#0e0b06;font-family:'Noto Sans SC',sans-serif}
 </div><!-- #app -->
 
 
-<button class="audio-toggle" id="btn-audio" title="背景音效">♪</button>
 <button class="admin-entry" id="btn-admin-entry" title="管理后台">⚙</button>
 
 <div class="toast" id="toast"></div>
@@ -1373,9 +1358,9 @@ const CHARS={
     tagline:'\u201c生存还是毁灭，这是一个问题。——而你，正是那个敢于直视问题的人。\u201d',
     traits:[{l:'核心气质',v:'忧郁·深沉'},{l:'思维方式',v:'辩证·反省'},{l:'内心渴望',v:'真相与公正'},{l:'致命弱点',v:'行动力不足'}],
     preview:'你拥有极其敏锐的洞察力与哲学性的思维，习惯于在行动前反复追问意义。你不满足于表面答案，总能看到旁人忽视的深层矛盾……',
-    full:'<p>你拥有极其敏锐的洞察力与哲学性的思维，习惯于在行动前反复追问意义。你不满足于表面答案，总能看到旁人忽视的深层矛盾。这种深度是你的天赋，也是你的负担——你的痛苦往往来自看得太清楚。</p><p>在你的内心世界里，怀疑与执行之间永远存在一条鸿沟。你不是胆怯，你只是无法接受那些简单的理由。你对世界有一种近乎洁癖的高标准，这让你成为极佳的思考者，却在行动层面反复拉扯。</p><p>你与他人连接的方式是智识上的共鸣，你需要能与你在深处对话的人。你时常感到孤独，不是因为身边无人，而是因为真正懂你的人实在太少。</p>',
+    full:'<p>你是那种会在深夜反复拷问自己的人——不是因为焦虑，而是因为你无法接受没有想清楚就行动这件事。你的大脑是一台永远在运转的精密仪器，它能看见别人忽略的层次，能在一个普通问题里发现三层矛盾，能在别人已经满意的答案里找到漏洞。这是天赋，但它也是负担。</p><p>你的天赋在于洞察。你能感知到一件事背后真正的动机，能在人群中辨别出谁在说真话、谁在表演，能预见一个决定可能引发的连锁后果。这让你成为极其出色的分析者、观察者和批评者。身边的人常常在困惑时想到你，因为你能说出他们自己都没意识到的问题所在。</p><p>但你的困境，也恰恰藏在这里。你看得太清楚，所以很难轻装上阵。每一个选择背后都有你看见的代价，每一条路都有你预见的风险，于是你站在原地，以「还没想清楚」为由，把行动推迟再推迟。不是懦弱，而是你的标准太高——你想要的，是一个完美的、没有遗憾的答案。而那样的答案，从来不存在。</p><p>在关系里，你是难以被真正理解的人。你渴望深度连接，却很难找到能与你在同一频率上对话的人。你不是不在乎，而是你的在乎方式太安静、太内化。你会记住对方说过的每一句话，会在脑海里反复推敲一次对话的细节，但你很少把这些说出来。于是你的爱，常常变成一场只有你知道的独奏。</p><p>你与自己的关系，是一生的修炼。你需要学习的，不是如何变得更聪明，而是如何与「不完美的自己」共处——那个有时会退缩、有时会犯错、有时会被情绪淹没的自己。接受这个自己，不是放弃标准，而是给自己一点做人的空间。你已经足够清醒，现在你需要的，是一点点勇敢。</p>',
     dims:[{l:'感性',r:'理性',p:45},{l:'内向',r:'外向',p:20},{l:'保守',r:'激进',p:60},{l:'顺从',r:'反叛',p:65},{l:'自省',r:'行动',p:25}],
-    advice:[{h:'关于行动',b:'允许自己在条件不够完美时迈出第一步。深思是礼物，但不完美的行动胜过完美的等待。'},{h:'关于人际',b:'试着把你的思考分享给信任的人——你的深度不是负担，而是罕见的礼物，值得被看见。'}],
+    advice:[{h:'设一个「够了就行」的决策规则',b:'每次陷入反复权衡时，给自己定一个截止时间：超过30分钟没有结论，就选当下最优解执行。行动后记录结果——你会发现大多数「想清楚再做」不如「做了再调整」。'},{h:'把思考转化成一次对话',b:'每周找一个你信任的人，把脑子里反复转的问题说出来，限时10分钟。说出来的那一刻，很多困局会自动松动。不需要对方给答案，你只需要一个听的人。'},{h:'用「最坏会怎样」打破拖延',b:'当你犹豫不决时，拿出纸写下：最坏的结果是什么？这个结果我能承受吗？如果能，就立刻行动。大多数你害怕的后果，写出来之后都没你想的那么可怕。'}],
     peers:['伊阿古','麦克白','波伏瓦'],
     books:[{t:'哈姆雷特',a:'莎士比亚',r:'原著精读，你的灵魂底稿'},{t:'存在主义咖啡馆',a:'萨拉·贝克韦尔',r:'理解你的哲学气质'},{t:'荒原狼',a:'赫尔曼·黑塞',r:'另一个与世界格格不入的灵魂'}],
     compat:{raskolnikov:85,daiyu:60,janeyre:45,gatsby:30,ahab:35,quixote:50,anna:40,julien:70}
@@ -1386,9 +1371,9 @@ const CHARS={
     tagline:'\u201c花谢花飞飞满天，红消香断有谁怜？——你的心，装得下整个世界的悲喜。\u201d',
     traits:[{l:'核心气质',v:'灵秀·敏感'},{l:'思维方式',v:'感性·诗意'},{l:'内心渴望',v:'被理解与真爱'},{l:'致命弱点',v:'过于在意他人'}],
     preview:'你有一颗极细腻的心，能感受到他人察觉不到的情绪变化与美感。你的内心是一座诗意的花园，装满了对美的渴望与对逝去的哀愁……',
-    full:'<p>你有一颗极细腻的心，能感受到他人察觉不到的情绪变化与美感。你的内心是一座诗意的花园，装满了对美的渴望与对逝去的哀愁。你不擅长在人前表现坚强，却以自己的敏感构建出无与伦比的精神世界。</p><p>你对爱有极高的纯粹性要求，宁愿清高孤独，也不愿将就。你的眼泪不是软弱，是情感的深度。你对美的感知是天才级别的——花开花落都能触动你，这种感受力让你的创造力远超常人。</p><p>你有时会过度解读他人的言行，将无心之语变成内心的风暴。学会区分哪些感知来自现实、哪些来自内心投射，是你一生的功课。</p>',
+    full:'<p>你的感受力，是这个世界上最罕见的东西之一。花开会让你心动，一句不经意的话会让你反复回味三天，一首歌能在某个下午把你击中到流泪。你不是多愁善感，你是真正在感受这个世界——而大多数人，其实只是在经过它。</p><p>你的天赋是感知美。你能在别人视而不见的地方发现诗意，能把一段普通的经历转化成让人动容的语言，能用最精准的词描述最幽微的情绪。这种能力，是艺术家、作家和所有创造者最核心的素质。你的内心世界，比你展示给外人的要丰富十倍。</p><p>但你的困境，是你太容易被外部世界伤到。一个眼神、一句玩笑、一次被忽略，都能在你心里激起风浪。问题不是你太脆弱，而是你的感知系统太精密——它在接收美的同时，也接收了所有的刺痛。你很难切换到「无所谓」的模式，因为那对你来说几乎是不可能的。</p><p>在关系里，你最渴望的是被真正理解。不是被安慰，不是被夸奖，而是有人能准确地说出你没有说出口的那句话。你不需要对方完美，你需要对方真实。你对虚情假意有天然的排斥，一旦感到对方在表演，你会立刻关上那扇门。但有时候，你关门的速度太快，还没等对方真正靠近，你就已经撤退了。</p><p>你与自己的关系，需要更多的宽容。你对自己的要求，并不比对世界的标准低。你会因为一次表现不好而懊悔很久，会因为说了一句不够好的话而辗转反侧。试着像对待你最爱的朋友那样对待自己——那个朋友偶尔犯错，偶尔软弱，你会对他说：没关系，你已经足够好了。你也值得听到这句话。</p>',
     dims:[{l:'感性',r:'理性',p:12},{l:'内向',r:'外向',p:10},{l:'保守',r:'激进',p:30},{l:'顺从',r:'反叛',p:35},{l:'自省',r:'行动',p:20}],
-    advice:[{h:'关于情绪',b:'你的敏感是天赋，但也需要边界。试着给情绪一个容器——写作、绘画、音乐——让它流动，而非堆积。'},{h:'关于关系',b:'真正爱你的人不需要你一直坚强。学会开口说出自己的需要，是对这段关系最深的信任。'}],
+    advice:[{h:'给情绪建一个「出口本」',b:'准备一个专门的本子，每次感到委屈或被误解时，先写下来，写完就合上。不需要解决，只需要释放。坚持一个月后回看，你会发现大部分风暴其实只持续了不到三天。'},{h:'练习「直接说出需求」的一句话',b:'每次想靠沉默让对方察觉你的情绪时，试着替换成一句话：「我现在需要你听我说五分钟」或「我有点难过，能陪我一下吗」。开口一次，比暗示十次有效，也不委屈自己。'},{h:'每周设一个「不在乎他人」时段',b:'每周留出两小时，做一件只取悦自己、不需要任何人看见或点赞的事。画画、发呆、读一本不实用的书。反复练习「我不需要被理解也可以快乐」，这是对敏感气质最好的滋养。'}],
     peers:['安娜·卡列尼娜','爱玛·包法利','叶赛宁'],
     books:[{t:'红楼梦',a:'曹雪芹',r:'你的母本，必读原著'},{t:'纯真年代',a:'伊迪丝·华顿',r:'另一个为时代所困的灵魂'},{t:'敏感的人',a:'伊尔斯·桑德',r:'读懂你的敏感是天赋不是弱点'}],
     compat:{anna:80,hamlet:60,raskolnikov:40,janeyre:35,gatsby:50,ahab:20,quixote:45,julien:30}
@@ -1399,9 +1384,9 @@ const CHARS={
     tagline:'\u201c我贫穷、低微、不美、矮小，但当我们的灵魂站在上帝面前，我们是平等的。\u201d',
     traits:[{l:'核心气质',v:'坚韧·自尊'},{l:'思维方式',v:'直接·务实'},{l:'内心渴望',v:'平等与真实的爱'},{l:'致命弱点',v:'有时过于执拗'}],
     preview:'你有一种罕见的精神独立性，不靠外貌、财富或他人的认可来定义自己的价值。你清楚地知道自己的底线在哪里，并且有勇气为之坚守……',
-    full:'<p>你有一种罕见的精神独立性，不靠外貌、财富或他人的认可来定义自己的价值。你清楚地知道自己的底线在哪里，并且有勇气为之坚守——哪怕代价是孤独。</p><p>你渴望真实的连接，而非表演式的感情。你对不公正有天然的敏感与反抗本能。你的力量不是来自声势，而是来自内心深处那份沉静的确信。</p><p>你有时会因为太过坚持原则而错过一些灵活的可能性。但这份执拗恰恰是你最宝贵的东西——在一个让人妥协的世界里，你选择了做自己。</p>',
+    full:'<p>你有一种很多人终其一生都无法拥有的东西：知道自己是谁。不是表演出来的自信，而是内心深处真实的确信——我有我的原则，我知道我的底线，我不需要任何人的许可来定义我自己的价值。这种确信，是你最核心的力量。</p><p>你的天赋是独立判断。在一个大多数人随波逐流的环境里，你能保持自己的清醒。你不会因为对方有钱有势就改变立场，不会因为大家都这么做就跟着做，不会因为害怕孤立就放弃自己的判断。你的内心有一把秤，轻重从来都是你自己来称的。这让你成为一个可以真正被信任的人。</p><p>但你的困境，在于你有时会把「坚持原则」变成「拒绝一切妥协」。不是所有的让步都是背叛，不是所有的弹性都是软弱。你的底线是真实的，但你用来保护底线的墙，有时建得太厚，把真正值得进来的人也挡在外面了。辨别哪些是真正的原则、哪些只是习惯性的防御，是你一生的功课。</p><p>在关系里，你渴望平等，多过渴望被爱。你不能接受一段让你失去自我的感情，不能接受居高临下的怜悯，不能接受「我爱你，但你要变成我想要的样子」。你要的，是两个完整的人之间真实的相遇。这个标准很高，但它是对的——只是在找到那个人之前，你需要学会在等待中不把自己封闭起来。</p><p>你与自己的关系，比你意识到的更需要温柔。你习惯了坚强，习惯了不依赖，习惯了独自扛下所有事。但坚强不是不允许自己疲惫，独立不是不允许自己被照顾。偶尔放下那副铠甲，让人看见你也有柔软的地方，不会让你变弱——反而会让你身边的关系，变得更真实。</p>',
     dims:[{l:'感性',r:'理性',p:55},{l:'内向',r:'外向',p:42},{l:'保守',r:'激进',p:65},{l:'顺从',r:'反叛',p:72},{l:'自省',r:'行动',p:68}],
-    advice:[{h:'关于边界',b:'你很擅长守住底线，但也记得留一些弹性空间——不是每一场战斗都值得打到底，要分辨哪些是真正的核心原则。'},{h:'关于亲密',b:'你的独立是力量，但真正的亲密需要你允许自己被人照顾。偶尔的脆弱，不会削弱你的强大。'}],
+    advice:[{h:'列出你的「可妥协清单」',b:'把你坚守的原则按重要性排序，写下哪些是绝对底线，哪些只是偏好。每次即将爆发冲突前先对照清单——如果对方触碰的只是偏好而非底线，给自己三秒钟选择放下。这不是妥协，是精力管理。'},{h:'每月做一件「允许自己被帮助」的事',b:'主动向一个你信任的人提出一个具体请求，比如「能帮我看看这封邮件吗」或「我最近有点累，能陪我聊聊吗」。你会发现开口求助并不会让你变弱，反而会让关系变深。'},{h:'建立「修复对话」的习惯',b:'当一段关系因为你的强硬出现裂痕时，不要等对方先开口。48小时内主动说一句：「上次我说话可能太直了，我想重新聊聊。」这不是认输，是你在保护真正重要的连接。'}],
     peers:['斯嘉丽·奥哈拉','爱丽丝','娜拉'],
     books:[{t:'简·爱',a:'夏洛蒂·勃朗特',r:'你的灵魂原型'},{t:'第二性',a:'西蒙·波伏瓦',r:'你骨子里的女性主义底色'},{t:'傲慢与偏见',a:'简·奥斯汀',r:'同样的独立内核，更多一份幽默'}],
     compat:{anna:50,hamlet:45,raskolnikov:55,daiyu:35,gatsby:40,ahab:60,quixote:42,julien:48}
@@ -1412,9 +1397,9 @@ const CHARS={
     tagline:'\u201c他那非凡的天赋是怀有希望，一种浪漫主义的敏锐——我从未在旁人身上见过。\u201d',
     traits:[{l:'核心气质',v:'执着·魅力'},{l:'思维方式',v:'目标导向·理想主义'},{l:'内心渴望',v:'重拾失去的完美'},{l:'致命弱点',v:'活在幻觉中'}],
     preview:'你有一种令人着迷的信念感——你深信只要足够努力、足够执着，梦想终究会实现。你为自己构建了一个宏大的叙事，并愿意为之付出一切……',
-    full:'<p>你有一种令人着迷的信念感——你深信只要足够努力、足够执着，梦想终究会实现。你为自己构建了一个宏大的叙事，并愿意为之付出一切。你的魅力很大程度上来自这种近乎疯狂的坚持。</p><p>然而，你有时会爱上自己对某人或某事的想象，而非真实本身。当现实终于出现在面前，它往往比不上你心中那道绿光——这是你的悲剧所在。</p><p>你的伟大，藏着你的悲剧。但正因如此，你的存在让这个世界更有诗意。</p>',
+    full:'<p>你是一个真正相信奇迹的人。不是盲目的乐观，而是一种近乎信仰的确信：只要足够努力、足够执着，那个遥远的、美好的东西，终究会向你走来。这种信念，让你在大多数人放弃的时候继续前行，让你在被现实打回来之后仍然能重新站起来，让你的存在本身就带着一种令人着迷的光芒。</p><p>你的天赋是感召力。你能为一件事赋予意义，能让身边的人相信那个可能性是真实的。你不只是追梦，你让梦变得具体、可见、值得为之燃烧。这是领袖的气质，是创业者的气质，是所有能把「不可能」变成现实的人身上共有的东西。你的热情不是表演，它是真实的，这正是它有感染力的原因。</p><p>但你的困境，在于你有时会爱上自己对一件事或一个人的「想象」，而不是它本来的样子。你在心里构建了一个完美的版本，然后把真实的对象套进那个模板里。当现实与想象出现偏差时，你会用更强的执念去填补那道缝隙，而不是调整自己的期待。这条路，最终会把你带到一个只有你自己的地方。</p><p>在关系里，你是炽热的，但炽热有时会变成压力。你全力投入的方式，让对方感受到被重视，但也可能让对方喘不过气。你需要学习一件事：真正的爱，是允许对方做他自己，而不是成为你叙事里的角色。当你能爱一个真实的人，而不是你想象中的那个人，你的感情才会真正落地。</p><p>你与自己的关系，需要更多「此刻」的练习。你是一个天然活在未来的人，你的眼睛永远望着那道绿光。但你追逐的过程中，有多少此刻的美好悄悄流逝了？学会在奔跑中停下来，感受此刻的自己——不是为了放弃梦想，而是为了让你在抵达的那一天，有足够的自己可以感受到那份喜悦。</p>',
     dims:[{l:'感性',r:'理性',p:40},{l:'内向',r:'外向',p:70},{l:'保守',r:'激进',p:75},{l:'顺从',r:'反叛',p:60},{l:'自省',r:'行动',p:78}],
-    advice:[{h:'关于目标',b:'在追逐绿光之前，停下来问问自己：我爱的是那个人本身，还是我对它的幻想？答案会改变你前进的方向。'},{h:'关于当下',b:'你擅长活在未来，但最珍贵的此刻，正在你追逐的路上悄悄流逝。'}],
+    advice:[{h:'做「现实核对」练习',b:'每当你对某个人或目标产生强烈执念时，写下两列：「我想象中它是什么样」和「我实际观察到的证据是什么」。每次对比，都在帮你区分绿光和真实的码头，让热情少踩坑。'},{h:'每天做一件「只属于当下」的小事',b:'设定一个每天5分钟的仪式——喝咖啡时不看手机、走路时感受脚踩地面的触感。这是训练自己的神经系统：当下也可以是美好的，不必一直活在「等我实现那件事之后」。'},{h:'把大目标拆成「本周唯一的一件事」',b:'每周日晚上写下：为了那个重要目标，本周我只需要做成一件什么事？执行它，记录结果。稳定的小步伐，比间歇性的爆发式冲刺，更能真正靠近你想要的那道光。'}],
     peers:['娜塔莎·罗斯托娃','冉阿让','于连·索雷尔'],
     books:[{t:'了不起的盖茨比',a:'菲茨杰拉德',r:'你的镜像，请反复阅读'},{t:'追忆似水年华',a:'普鲁斯特',r:'同样痴迷于过去的文学巨作'},{t:'挪威的森林',a:'村上春树',r:'另一种绿光，另一种无法企及'}],
     compat:{anna:55,hamlet:30,raskolnikov:35,daiyu:50,janeyre:40,ahab:45,quixote:38,julien:60}
@@ -1425,9 +1410,9 @@ const CHARS={
     tagline:'\u201c我并没有杀人，我只是消灭了一个原则。——你始终在寻找超越规则的理由。\u201d',
     traits:[{l:'核心气质',v:'偏执·犀利'},{l:'思维方式',v:'批判·超越常规'},{l:'内心渴望',v:'证明自己不平凡'},{l:'致命弱点',v:'骄傲与自我怀疑并存'}],
     preview:'你对世界有一套自己的逻辑体系，往往走在普通人理解的边界之外。你渴望证明自己不只是普通人，并常常用极端思维实验检验自己的信念……',
-    full:'<p>你对世界有一套自己的逻辑体系，往往走在普通人理解的边界之外。你渴望证明自己不只是普通人，并常常用极端的思维实验来检验自己的信念。</p><p>你对社会的伪善有强烈的厌恶感，却又无法完全脱离自己的良知与道德感。你内心深处的矛盾是你最真实的战场——思想的锋利与情感的柔软在你身上奇特地共存。</p><p>你需要的不是更多的分析，而是一个真正信任的人，让你允许自己软下来。</p>',
+    full:'<p>你的思维方式，和大多数人不在同一个轨道上。你习惯往更深处走，不满足于表面的解释，不接受「大家都这么做」作为理由，不愿意用别人给的框架来理解世界。你要的，是真正想清楚。这是极少数人拥有的能力，也是一种沉重的天赋。</p><p>你的天赋是穿透力。你能看见一件事背后的逻辑链条，能识别出一套说法里的内在矛盾，能在别人点头称是的时候提出真正尖锐的问题。你不是为了挑衅而质疑，你是因为真的在思考。这让你成为一个极有价值的思考者——在需要真正分析问题的地方，你是最稀缺的那种人。</p><p>但你的困境，在于你的思维有时会走进一个封闭的房间。你开始用一套自己建构的逻辑来解释一切，这套逻辑越来越完整、越来越自洽，同时也越来越难以被外部现实修正。你的骄傲会让你很难承认「我错了」，于是你会在错误的方向上越走越深，用更多的分析来为最初的判断辩护。这是聪明人最危险的陷阱。</p><p>在关系里，你很难真正放松。你的分析能力在人际关系里会变成一种负担——你会分析对方的动机，分析一段对话的潜台词，分析一个行为背后的真实意图。这让你很难单纯地享受一段关系，也让对方很难真正走近你。你需要的，不是停止思考，而是学会在某些时刻，允许自己不分析，只是在场。</p><p>你与自己的关系，是你最需要正视的战场。你内心深处有一个声音，在反复质问你：你真的足够特别吗？你真的值得那个位置吗？这种自我怀疑，往往被你的骄傲掩盖着，让外人看不见，但它是真实存在的。当你能正视这个声音，而不是用更多的理论来压制它，你才能真正从那个封闭的房间里走出来，重新与世界发生真实的连接。</p>',
     dims:[{l:'感性',r:'理性',p:35},{l:'内向',r:'外向',p:15},{l:'保守',r:'激进',p:85},{l:'顺从',r:'反叛',p:90},{l:'自省',r:'行动',p:40}],
-    advice:[{h:'关于自我',b:'你的智识是天赋，但注意不要用超越规则来为自己的痛苦寻找出口。有时候，接受帮助本身就是一种勇气。'},{h:'关于连接',b:'你不需要一直是最聪明的那个人。真正的连接发生在你卸下防御的时刻。'}],
+    advice:[{h:'找一个「安全的挑战对象」',b:'你的思维需要碰撞才有活力。找一个你尊重但观点与你不同的人，每月深谈一次，规则是：你必须认真理解对方的逻辑，不能中途反驳。你不是在认同他，你是在测试自己思维的边界。'},{h:'用「身体行动」打断思维反刍',b:'当你陷入反复论证和自我怀疑的循环时，立刻做一件需要身体参与的事：出门走30分钟、做20个俯卧撑、洗一个热水澡。身体的感受是打断过度思维最快的方法，不是更多的分析。'},{h:'每周记录「我今天帮了谁」',b:'每周找一次机会，用你的能力帮助一个具体的人——帮人改个方案、解答一个困惑。记录下来。你会发现「有用于人」比「超越规则」更能给你真实的力量感。'}],
     peers:['齐奥拉纳','尼采','约伯'],
     books:[{t:'罪与罚',a:'陀思妥耶夫斯基',r:'你的精神原典'},{t:'查拉图斯特拉如是说',a:'尼采',r:'你的思想有一半住在这里'},{t:'局外人',a:'加缪',r:'另一种反叛，更冷静的版本'}],
     compat:{hamlet:85,julien:75,ahab:60,janeyre:55,gatsby:35,daiyu:40,quixote:30,anna:45}
@@ -1438,9 +1423,9 @@ const CHARS={
     tagline:'\u201c我会越过太阳追击你，越过地狱的火焰，直到你失去气息。\u201d',
     traits:[{l:'核心气质',v:'狂热·不屈'},{l:'思维方式',v:'极端·目标单一'},{l:'内心渴望',v:'征服无法征服之物'},{l:'致命弱点',v:'偏执到自我毁灭'}],
     preview:'你的灵魂里燃烧着一种别人无法理解的火焰。一旦认定了一个目标，你会以令人震撼的专注与意志力全力追求，不受任何外部力量左右……',
-    full:'<p>你的灵魂里燃烧着一种别人无法理解的火焰。一旦认定了一个目标，你会以令人震撼的专注与意志力全力追求，不受任何外部力量左右。</p><p>你对极限这个词天生抵触——你要的不是安全，是彻底的、没有妥协的胜利。这种烈度让你成为天生的领袖与斗士，也让你的人生充满代价高昂的偏执。</p><p>你最需要的人，是那个能在你快要燃尽之前轻声告诉你够了的人。</p>',
+    full:'<p>你的灵魂里有一团火，别人不一定看得见，但你自己知道它在。那是一种对某件事、某个目标、某种意义的极度渴望——不是普通的想要，而是「不得到就无法安心」的那种渴望。这团火让你在别人停下来的地方继续走，让你承受普通人无法承受的消耗，让你的人生具有一种令人震撼的烈度。</p><p>你的天赋是意志力。一旦认定了方向，你能调动全部的资源、精力和注意力朝那个方向前进，不被动摇，不被分散，不被「算了吧」说服。这种专注力，在大多数人漫无目的地消耗时间的世界里，是极其稀缺的。你能做成很多人认为不可能的事，因为你真的愿意为它付出别人不愿意付出的代价。</p><p>但你的困境，在于那团火有时会失控。当你把一个目标变成一种执念，当追逐本身变成了意义本身，你就开始失去分辨力——你看不见那头「白鲸」是否还值得追，看不见自己已经走了多远的弯路，也看不见身边的人正在被你的烈度灼伤。执念和热情的区别，不在于强度，而在于你是否还能退一步看见全局。</p><p>在关系里，你是有魅力但难以相处的人。你的专注和强度会吸引人，但你全力追逐目标时的模样，会让身边的人感到被排在第二位。不是因为你不在乎他们，而是因为你在乎某件事的方式，会自动压缩其他所有事情的空间。学会定期回头看——不是为了放弃追逐，而是为了确认你还有可以一起走下去的人。</p><p>你与自己的关系，需要一个你一直在回避的问题：那头白鲸，究竟是什么？有时候，我们拼命追逐的，不是我们真正想要的东西，而是某个未愈合的伤口投射出来的幻影。当你有一天愿意停下来，认真问自己这个问题，你才能真正知道自己在追什么，以及——它值不值得你的命。</p>',
     dims:[{l:'感性',r:'理性',p:50},{l:'内向',r:'外向',p:55},{l:'保守',r:'激进',p:90},{l:'顺从',r:'反叛',p:92},{l:'自省',r:'行动',p:88}],
-    advice:[{h:'关于目标',b:'问一问自己：我在追逐的，究竟是真实的目标，还是一头象征着我未解的伤的白鲸？有时候，放下比追求更需要勇气。'},{h:'关于他人',b:'你的意志力足以征服海洋，但别忘了，你的船上还有其他人。'}],
+    advice:[{h:'做「代价清单」再出发',b:'每次为某个目标全力以赴之前，先用10分钟写下：为了这件事，我愿意付出什么代价？不愿意付出什么？写完再决定是否全投入。这不是劝你退缩，是让你带着清醒的眼睛去战斗，而不是燃尽后才发现代价。'},{h:'每周强制「关机半天」',b:'每周至少有一个半天，不谈目标、不复盘进度、不规划下一步。强制做一件完全无关的事：做饭、看闲书、和朋友扯淡。这是在给执行力充电，防止你在最重要的时刻突然燃尽。'},{h:'建立「船员反馈」机制',b:'每个月问身边最近的1-2个人：「我最近有没有让你觉得被忽视或被强迫跟随？」认真听答案，哪怕你不同意。你的目标需要盟友，不是服从者。留住身边真正的人，比多赢一场战役重要。'}],
     peers:['唐·璜','麦克白','克里斯托弗·哥伦布'],
     books:[{t:'白鲸',a:'赫尔曼·梅尔维尔',r:'你的史诗，你的执念之书'},{t:'老人与海',a:'海明威',r:'同样与命运角力的灵魂'},{t:'麦克白',a:'莎士比亚',r:'当执念遇上野心，命运如何书写'}],
     compat:{raskolnikov:60,julien:55,janeyre:60,hamlet:35,gatsby:45,daiyu:20,quixote:30,anna:38}
@@ -1452,9 +1437,9 @@ const CHARS={
     tagline:'“一切都结束了，我除了他别无所有，我要他记住这一点。”',
     traits:[{l:'核心气质',v:'热烈·致命'},{l:'思维方式',v:'感性·全情投入'},{l:'内心渴望',v:'真实的爱与自由'},{l:'致命弱点',v:'无法半途而废'}],
     preview:'你爱起来不留退路，恨起来也彻底决绝。你对虚伪的体面有一种本能的厌恶，宁愿把一切押注在真实的感受上……',
-    full:'<p>你爱起来不留退路，恨起来也彻底决绝。你对虚伪的体面有一种本能的厌恶，宁愿把一切押注在真实的感受上，哪怕那是悬崖。</p><p>你的存在本身就是一种张力——你太耀眼，让人无法忽视，却也因此承受着最重的目光。你从不会为了安全感而委屈自己，但代价是，你的情感烈度让周围的人很难接住你。</p><p>你需要的不是更多的爱，而是一个足以接住你全部重量的人。在找到那个人之前，请先学会接住自己。</p>',
+    full:'<p>你爱起来，是不留退路的那种。不是不理智，而是你对虚情假意有一种本能的排斥——要么真实，要么不要。你无法维持一段表面和谐但内里空洞的关系，无法为了所谓的体面压抑自己真实的感受，无法在「应该怎么样」和「我真正感受到什么」之间选择前者。这种真实，是你最动人的地方，也是你最脆弱的地方。</p><p>你的天赋是情感烈度。你能感受到普通人感受不到的深度，无论是爱还是痛，你都比别人更彻底。这让你的存在本身就有一种张力和光芒——你出现的地方，气场会改变。你的情感是真实的、热烈的、令人无法忽视的，这是一种天生的感召力，也是一种难以被驯化的能量。</p><p>但你的困境，在于这种烈度很难找到真正接得住它的容器。你渴望的，是一个能承受你全部重量的人，一段能盛放你真实自我的关系。但这样的人和这样的关系，比你想象中更难找。而在找到之前，你容易把一个「看起来能接住你」的人，快速升格成「一定能接住你」的人，然后在对方露出真实的局限时，经历毁灭性的失望。</p><p>在关系里，你需要学习一件很难的事：爱一个人，和在一个人身上寻找救赎，是两件完全不同的事。前者是给予，后者是索取——不是道德意义上的，而是心理意义上的。当你把一段感情变成你存在的全部意义时，你就把太重的东西交给了对方，也交给了命运。而你，是值得有自己的根的人。</p><p>你与自己的关系，是你一生最重要的课题。你需要学会在没有任何人爱你的时候，依然能感受到自己的完整。不是冷漠，不是放弃爱，而是建立一个只属于你自己的内核——无论外面发生什么，你知道你还在。那个内核，是你的根，是你任何时候都可以回来的地方。有了根，你的爱才能真正自由。</p>',
     dims:[{l:'感性',r:'理性',p:8},{l:'内向',r:'外向',p:65},{l:'保守',r:'激进',p:70},{l:'顺从',r:'反叛',p:75},{l:'自省',r:'行动',p:55}],
-    advice:[{h:'关于爱',b:'你的爱是天才级的，但爱一个人不应该等于消失成那个人。保留自己的根，才能让爱走得更远。'},{h:'关于情绪',b:'当你觉得一切都失控时，先停下来问问：这个感受是真实的信号，还是旧伤在说话？'}],
+    advice:[{h:'练习「暂停24小时」原则',b:'每当你在关系中感受到强烈的情绪冲动——想逃、想质问、想决裂——先给自己24小时。在这24小时里不做任何决定，写下感受，睡一觉再看。很多夜里看起来无法承受的事，白天会有完全不同的样子。'},{h:'建立「除了ta之外的生命清单」',b:'写下三件与任何亲密关系完全无关、只属于你自己的事：一个技能、一个兴趣、一个定期见面的朋友圈。每周至少投入一件。这不是背叛爱，而是让你有一个根，当关系出现风暴时不至于整个人被卷走。'},{h:'学会说「我需要时间想想」',b:'在关系里，练习不立刻回应对方的每一个情绪或要求。当对方提出让你不舒服的事时，试着说：「我需要一点时间想想，明天给你答复。」这一句话能帮你从「全情反应」切换到「有意识选择」。'}],
     peers:['林黛玉','盖茨比','茅山的渔期'],
     books:[{t:'安娜·卡列尼娜',a:'列夫·托尔斯泰',r:'你的灵魂之书'},{t:'包法利夫人',a:'福楼拜',r:'同样在枷锁中燃烧的女人'},{t:'飘',a:'玛格丽特·米切尔',r:'烈性与爱情，另一种壮烈选择'}],
     compat:{daiyu:80,gatsby:55,hamlet:40,janeyre:50,raskolnikov:45,ahab:38,quixote:40,julien:42}
@@ -1465,9 +1450,9 @@ const CHARS={
     tagline:'“我的野心是通往幸福的唯一道路。”',
     traits:[{l:'核心气质',v:'野心·敏感'},{l:'思维方式',v:'算计·自我怀疑并存'},{l:'内心渴望',v:'突破阶层，被世界承认'},{l:'致命弱点',v:'骄傲摧毁了他自己'}],
     preview:'你清醒地知道自己想要什么，也清醒地知道自己所处的位置——这两者之间的落差，是你一生的燃料……',
-    full:'<p>你清醒地知道自己想要什么，也清醒地知道自己所处的位置——这两者之间的落差，是你一生的燃料，也是你最深的伤。</p><p>你在人群中永远保持着一份距离，观察、计算、推演。你并非冷漠，恰恰相反——你太渴望被认可，以至于不得不把渴望藏得很深。</p><p>你身上最动人的，是那种即便知道前路艰难也绝不退缩的烈性。但请记住：真正值得你攀登的高峰，是你内心的那座，而不是别人眼中的那一座。</p>',
+    full:'<p>你比同龄人更早地意识到，这个世界不是按照公平运转的。你看见了阶层，看见了规则背后的权力，看见了那些被默认但从未被说出的游戏规则。这种清醒，让你在别人还懵懵懂懂的时候，就已经开始思考自己要去哪里、怎么去。这是一种早熟的代价，也是一种真实的力量。</p><p>你的天赋是战略性思维。你能迅速读懂一个场合的潜规则，能判断什么时候该进、什么时候该退，能在复杂的人际关系里找到真正的杠杆点。这让你在很多环境里如鱼得水，也让你成为一个很难被轻易欺骗的人。你不是天真的那种，你是清醒的那种——而清醒，在这个世界里，是一种资产。</p><p>但你的困境，在于你的清醒有时会变成一种防御。你习惯了分析别人的动机，习惯了预判对方的意图，习惯了在任何关系里保持一定的距离和警惕。这让你很难真正放松地接受一段感情或友谊，因为你总在某个角落里问：他们真正想要的是什么？这种质疑不是错的，但它会让真正真诚的人也无法走近你。</p><p>在关系里，你渴望被真正看见，但你不太会表达这种渴望。你更习惯用表现来证明自己的价值，而不是直接说「我需要你认可我，我需要你看见我的努力」。这让你在关系里常常处于一种隐秘的疲惫——你一直在证明，却从来没有人知道你需要被证明。试着有一次，不证明，只是说出来。</p><p>你与自己的关系，是你所有努力的地基。你花了大量精力去改变自己在外人眼里的位置，但花在理解自己上的时间，其实并不多。你真正想要的是什么？不是那个「成功之后的我应该拥有什么」，而是此刻，剥去所有目标和计划，你这个人，想要什么？那个答案，才是值得你用全部战略能力去追逐的方向。</p>',
     dims:[{l:'感性',r:'理性',p:40},{l:'内向',r:'外向',p:35},{l:'保守',r:'激进',p:78},{l:'顺从',r:'反叛',p:82},{l:'自省',r:'行动',p:60}],
-    advice:[{h:'关于野心',b:'野心是燃料，但别让它成为你唯一的身份。问问自己：如果没有任何人看见，我还愿意做这件事吗？'},{h:'关于自尊',b:'你的骄傲保护了你，但也隔绝了你。试着让一两个人真正走近你——不是为了利用，而是为了被接住。'}],
+    advice:[{h:'每周做一件「没有战略目的」的事',b:'你的大脑习惯把所有事都纳入某个计划。试着每周做一件完全没有任何回报预期的事：帮一个不会给你带来好处的人、阅读一本与目标无关的书。反复练习，你会逐渐区分「我真正喜欢什么」和「我以为自己想要什么」。'},{h:'建立一段「不需要赢」的关系',b:'主动维护至少一段完全对等、不存在利益关系的友谊。每月联系，不谈进展和计划，只是聊聊彼此的状态。当你发现在一段关系里不需要表现、不需要胜出，你才真正开始理解什么叫被接受。'},{h:'做「去掉他人视线」的决策测试',b:'每当面临重要选择时，问自己：如果没有任何人知道我做了这个选择，我还会选它吗？如果答案是否定的，这个选择是在满足别人的期待，不是你真实的方向。把这个问题存在手机备忘录，每次大决策前都打开看一眼。'}],
     peers:['拉斯柯尔尼科夫','盖茨比','小欧黑德'],
     books:[{t:'红与黑',a:'司汤达',r:'你的精神原本，请精读'},{t:'高老头',a:'巴尔扎克',r:'阶层与野心的另一面镜子'},{t:'局外人',a:'加缪',r:'当野心耗尽，你还剩什么'}],
     compat:{raskolnikov:75,hamlet:70,ahab:55,gatsby:60,janeyre:48,daiyu:30,quixote:35,anna:42}
@@ -1478,9 +1463,9 @@ const CHARS={
     tagline:'\u201c疯狂是什么？疯狂是用幽默对抗世界的荒诞。——而你，是清醒的骑士。\u201d',
     traits:[{l:'核心气质',v:'理想主义·天真'},{l:'思维方式',v:'诗意·反常规'},{l:'内心渴望',v:'在俗世中守护美与骑士精神'},{l:'致命弱点',v:'与现实脱节'}],
     preview:'你有一颗不愿被现实驯化的心。你在平凡中看见传奇，在磨坊里看见巨人，在人群里看见骑士的使命……',
-    full:'<p>你有一颗不愿被现实驯化的心。你在平凡中看见传奇，在磨坊里看见巨人，在人群里看见骑士的使命。这不是幼稚，这是一种近乎宗教的对美好的信仰。</p><p>你用幽默和荒诞保护自己，也保护着内心那个纯粹的自我。你比任何人都清楚这个世界的规则，但你选择不遵守——不是因为天真，而是因为清醒。</p><p>你的存在提醒所有人：在一个让人彻底务实的世界里，需要有人守护那些看似没用的美。</p>',
+    full:'<p>在这个要求每个人都务实、都精明、都会算投入产出的世界里，你是一个异类。你在平凡里看见传奇，你在磨坊里看见巨人，你在一段普通的旅途里看见骑士的使命。这不是幼稚，这是一种近乎稀有的能力——你能给生活赋予意义，而大多数人，只是在度过它。</p><p>你的天赋是诗意感。你能在任何环境里找到值得热情的理由，能在枯燥的现实里建构出一套让人愿意相信的叙事，能用幽默和荒诞消解那些本来会让人绝望的东西。这让你成为一个让人感到温暖的存在——不是因为你解决了问题，而是因为你改变了看问题的角度。</p><p>但你的困境，在于你有时会在自己构建的世界里迷路。你对「美好应该是什么样」有很清晰的图景，而当现实与它出现偏差时，你会倾向于调整对现实的解读，而不是调整自己的期待。这让你有时在别人眼里显得「不切实际」，更重要的是，它会让你错过一些真正重要的信号——有些磨坊，就是磨坊，不是巨人。</p><p>在关系里，你是令人愉快但难以真正靠近的人。你的幽默和理想感让人喜欢和你在一起，但你不太习惯把真实的困境和软弱展示给别人。你更擅长用玩笑化解严肃，用故事包装痛苦，用诗意遮盖那些你不想直视的东西。允许自己在关系里偶尔不那么有趣，允许对方看见你疲惫和迷茫的样子，这是一种更深的亲密。</p><p>你与自己的关系，是所有人里最需要保护的。这个时代会反复告诉你：你这样不行，要现实一点，要聪明一点，要少做梦。不要全信。你的理想主义是稀缺品，这个世界需要你这样的人来提醒它，除了效率和利益，还有别的东西值得珍惜。保护好那团火，同时学会辨别哪些风车值得一战——有选择地战斗，才是真正的骑士。</p>',
     dims:[{l:'感性',r:'理性',p:22},{l:'内向',r:'外向',p:60},{l:'保守',r:'激进',p:55},{l:'顺从',r:'反叛',p:58},{l:'自省',r:'行动',p:62}],
-    advice:[{h:'关于理想',b:'你的理想主义是稀缺品，请珍惜它。但也学会在适当时候辨别哪些是磨坊，哪些真的是巨人。'},{h:'关于接地',b:'与那些脚踏实地的人为伴，他们不会消灭你的浪漫，只会帮你的梦想多走几步。'}],
+    advice:[{h:'给理想找一个「现实锚点」',b:'每次有一个宏大想法或使命感涌现时，立刻问自己：本周我能为它做的最小、最具体的一步是什么？把这一步写下来并执行。你的骑士精神需要和地面保持接触，才能走得更远，而不是只活在幻想的战场上。'},{h:'找一个「桑丘」型的伙伴',b:'主动在你身边找一个脚踏实地、说话直接的人，定期和他分享你的想法，认真听他提出的现实质疑。先考虑三天再反驳。这个人是你的地面，不是你的敌人——正是有了桑丘，堂吉诃德才能走完那段旅程。'},{h:'用三个问题筛选值得战斗的事',b:'每次想要投入一场战斗或使命之前，问自己：这件事一年后还重要吗？有没有实际会受益的具体的人？我现在的状态适合打这一仗吗？三个都是肯定，再全力出击。有选择地战斗，才是真正的骑士。'}],
     peers:['彼得·潘','约翰·基廷','圣-埃克絮佩里'],
     books:[{t:'堂吉诃德',a:'塞万提斯',r:'你的精神祖先，笑中带泪'},{t:'小王子',a:'圣-埃克絮佩里',r:'另一颗拒绝长大的灵魂'},{t:'百年孤独',a:'加西亚·马尔克斯',r:'荒诞即现实，浪漫即真相'}],
     compat:{daiyu:45,hamlet:50,anna:40,gatsby:38,janeyre:42,raskolnikov:30,ahab:30,julien:35}
@@ -1613,7 +1598,25 @@ function renderQ(){
   },180);
 }
 
-function selectOpt(i){ans[cur]=i;saveProgress();showSaveBanner();renderQ();}
+function selectOpt(i){
+  ans[cur]=i;
+  saveProgress();
+  showSaveBanner();
+  // Only update option highlight, no slide animation
+  document.querySelectorAll('.opt').forEach(function(btn,idx){
+    btn.classList.toggle('selected', idx===i);
+    btn.querySelector('.opt-badge').style.background = idx===i ? '#b8933f' : '';
+    btn.querySelector('.opt-badge').style.borderColor = idx===i ? '#b8933f' : '';
+    btn.querySelector('.opt-badge').style.color = idx===i ? '#fff' : '';
+  });
+  // Enable next button
+  var nxt=document.getElementById('btn-next');
+  if(nxt){
+    nxt.disabled=false;
+    nxt.textContent=cur===QS.length-1?'查看结果 ✦':'下一题 →';
+    nxt.className='nav-btn btn-next'+(cur===QS.length-1?' last':'');
+  }
+}
 function prevQ(){if(cur>0){cur--;saveProgress();renderQ();}}
 
 function nextQ(){
@@ -1679,7 +1682,6 @@ function buildResult(){
   setTimeout(function(){typewriterEffect(document.getElementById('r-name'),ch.name,80);},200);
   renderCompat(ch,winner);
   renderBooks(ch);
-  playSuccess();
   setTimeout(function(){
     document.querySelectorAll('.dim-fill').forEach(function(el){
       el.style.width=el.dataset.pct+'%';
@@ -1703,7 +1705,7 @@ function verifyCode(){
     fr.classList.add('unlocking');
     var ov=document.querySelector('.res-blur-overlay');
     if(ov)ov.style.display='none';
-    doUnlockAnimation();
+    showToast('解锁成功！完整灵魂报告已开启 ✦',2500);
     setTimeout(function(){
       document.querySelectorAll('.dim-fill').forEach(function(el){el.style.width=el.dataset.pct+'%';});
       document.querySelectorAll('.compat-fill').forEach(function(el){el.style.width=el.dataset.pct+'%';el.style.background=el.dataset.color||'#b8933f';});
@@ -1744,19 +1746,15 @@ document.addEventListener('DOMContentLoaded',function(){
     var url=window.location.href;
     navigator.clipboard.writeText(url).then(function(){alert('链接已复制！请截图此卡片后发到小红书，并在文案中附上链接 ✦');}).catch(function(){alert('请截图此卡片发到小红书 #你是哪位文学灵魂');});
   });
-  document.getElementById('btn-audio').addEventListener('click',function(){toggleAudio();initAudio();});
   document.getElementById('btn-admin-entry').addEventListener('click',openAdmin);
   document.getElementById('btn-admin-close').addEventListener('click',closeAdmin);
   document.getElementById('btn-gen-codes').addEventListener('click',generateCodes);
   document.getElementById('btn-copy-codes').addEventListener('click',copyAllCodes);
-  initAudio();
   initParticles();
   initSwipe();
   // animate social proof counter
   var counterEl=document.querySelector('.paywall-social strong');
   if(counterEl)animateCounter(counterEl,2847,1800);
-  selectOpt_orig=selectOpt;
-  selectOpt=function(i){playPageTurn();selectOpt_orig(i);};
 });
 
 // ── Compat chart ──────────────────────────────────────
@@ -1825,48 +1823,7 @@ function openShareCard(ch){
   document.getElementById('card-screen').classList.add('open');
 }
 
-// ── Audio ──────────────────────────────────────────────
-var audioCtx=null,audioMuted=false;
-function initAudio(){
-  try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}
-}
-function playPageTurn(){
-  if(audioMuted||!audioCtx)return;
-  try{
-    var buf=audioCtx.createBuffer(1,audioCtx.sampleRate*0.12,audioCtx.sampleRate);
-    var d=buf.getChannelData(0);
-    for(var i=0;i<d.length;i++){
-      d[i]=(Math.random()*2-1)*Math.exp(-i/(audioCtx.sampleRate*0.04))*0.15;
-    }
-    var src=audioCtx.createBufferSource();
-    var filt=audioCtx.createBiquadFilter();
-    filt.type='bandpass';filt.frequency.value=2200;filt.Q.value=0.8;
-    src.buffer=buf;src.connect(filt);filt.connect(audioCtx.destination);
-    src.start();
-  }catch(e){}
-}
-function playSuccess(){
-  if(audioMuted||!audioCtx)return;
-  try{
-    [523,659,784].forEach(function(freq,i){
-      var osc=audioCtx.createOscillator();
-      var gain=audioCtx.createGain();
-      osc.frequency.value=freq;osc.type='sine';
-      gain.gain.setValueAtTime(0,audioCtx.currentTime+i*0.12);
-      gain.gain.linearRampToValueAtTime(0.06,audioCtx.currentTime+i*0.12+0.05);
-      gain.gain.linearRampToValueAtTime(0,audioCtx.currentTime+i*0.12+0.25);
-      osc.connect(gain);gain.connect(audioCtx.destination);
-      osc.start(audioCtx.currentTime+i*0.12);
-      osc.stop(audioCtx.currentTime+i*0.12+0.3);
-    });
-  }catch(e){}
-}
-function toggleAudio(){
-  audioMuted=!audioMuted;
-  var btn=document.getElementById('btn-audio');
-  btn.textContent=audioMuted?'♪':'♪';
-  btn.classList.toggle('muted',audioMuted);
-}
+// audio removed
 
 // ── Admin panel ────────────────────────────────────────
 var ADMIN_PASS='admin888';
@@ -2056,14 +2013,6 @@ function showSaveBanner(){
   setTimeout(function(){b.classList.remove('show');},1500);
 }
 
-// ── Unlock with animation ────────────────────────────
-function doUnlockAnimation(){
-  var fr=document.getElementById('full-report');
-  if(!fr)return;
-  fr.classList.add('unlocking');
-  showToast('解锁成功！完整灵魂报告已开启 ✦',2500);
-  playSuccess();
-}
 
 
 // ── QR canvas (placeholder pattern) ──────────────────
@@ -2138,7 +2087,7 @@ function confirmPayCode(){
     fr.style.display='block';
     var ov=document.querySelector('.res-blur-overlay');
     if(ov)ov.style.display='none';
-    doUnlockAnimation();
+    showToast('解锁成功！完整灵魂报告已开启 ✦',2500);
     setTimeout(function(){
       document.querySelectorAll('.dim-fill').forEach(function(el){el.style.width=el.dataset.pct+'%';});
       document.querySelectorAll('.compat-fill').forEach(function(el){el.style.width=el.dataset.pct+'%';el.style.background=el.dataset.color||'#b8933f';});
